@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>lx-toolbox</artifactId>
+    <groupId>cn.mu00</groupId>
+    <version>0.0.1</version>
+  </parent>
+
+  <name>lx-system</name>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>lx-system</artifactId>
+  <description>web服务入口</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>cn.mu00</groupId>
+      <artifactId>lx-common</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>
