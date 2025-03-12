@@ -1,4 +1,4 @@
-package cn.mu00.admin;
+package cn.mu00.tools;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

@@ -1,4 +1,4 @@
-package cn.mu00.common.constant;
+package cn.mu00.tools.common.constant;
 
 /**
  * 返回状态码

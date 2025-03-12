@@ -1,7 +1,7 @@
-package cn.mu00.admin.controller;
+package cn.mu00.tools.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.mu00.common.domain.R;
+import cn.mu00.tools.common.domain.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

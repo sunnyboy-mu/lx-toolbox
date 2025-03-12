@@ -1,7 +1,7 @@
-package cn.mu00.common.domain;
+package cn.mu00.tools.common.domain;
 
 
-import cn.mu00.common.constant.HttpStatus;
+import cn.mu00.tools.common.constant.HttpStatus;
 
 import java.io.Serializable;
 

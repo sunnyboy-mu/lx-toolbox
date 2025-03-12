@@ -43,6 +43,10 @@
       <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-annotation</artifactId>
+    </dependency>
 
     <!-- JSON工具类 -->
     <dependency>
@@ -61,10 +65,21 @@
       <artifactId>hutool-core</artifactId>
     </dependency>
 
-    <!-- Sa-Token -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>cn.dev33</groupId>
       <artifactId>sa-token-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- jdk 8+ 引入可选模块 -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
     </dependency>
 
 
