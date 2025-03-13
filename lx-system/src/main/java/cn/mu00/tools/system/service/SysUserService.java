@@ -1,10 +1,7 @@
 package cn.mu00.tools.system.service;
 
-import cn.mu00.tools.common.domain.R;
 import cn.mu00.tools.system.domain.SysUser;
-import cn.mu00.tools.system.domain.vo.LoginVo;
 import cn.mu00.tools.system.domain.vo.PasswordVo;
-import cn.mu00.tools.system.domain.vo.TokenVo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -29,7 +26,7 @@ public interface SysUserService extends IService<SysUser> {
 
     Map<String, String> resetPwd(String userId);
 
-    TokenVo login(LoginVo loginVo);
 
-    void logout();
+    String generateAuthCode();
+
 }

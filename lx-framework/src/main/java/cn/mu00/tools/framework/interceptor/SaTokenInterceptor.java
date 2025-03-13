@@ -16,6 +16,6 @@ public class SaTokenInterceptor implements WebMvcConfigurer {
                     StpUtil.checkLogin();
                 }))
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login","/**.interface");
+                .excludePathPatterns("/login", "/oauth/login", "/**.interface");
     }
 }

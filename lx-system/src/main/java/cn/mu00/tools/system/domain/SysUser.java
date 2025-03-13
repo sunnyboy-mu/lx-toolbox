@@ -22,6 +22,9 @@ public class SysUser implements Serializable {
     private String password;
     private String avatar;
     private String nickname;
+
+    private String code;
+
     private String tags;
 
     private String role; // 角色，使用枚举或字符串

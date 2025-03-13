@@ -4,10 +4,11 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.mu00.tools.common.domain.R;
+import cn.mu00.tools.common.constant.EntityStatus;
 import cn.mu00.tools.common.exception.ServiceException;
 import cn.mu00.tools.common.redis.RedisCache;
 import cn.mu00.tools.system.domain.SysUser;
@@ -23,7 +24,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -122,51 +122,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public TokenVo login(LoginVo loginVo) {
-        // 判断账号密码是否存在
-        if (StrUtil.isEmpty(loginVo.getUsername()) || StrUtil.isEmpty(loginVo.getPassword())) {
-            throw new ServiceException("账号或密码不能为空", 500);
-        }
-        // 账户正确
-        SysUser user = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, loginVo.getUsername()));
-        if (ObjectUtil.isNull(user)){
-            throw new ServiceException("账号或密码错误", 500);
-        }
-
-        // 加密密码
-        String password = SaSecureUtil.md5(loginVo.getPassword());
-        if (!user.getPassword().equals(password)) {
-            throw new ServiceException("账号或密码错误", 500);
-        }
-        return login(user);
-    }
-
-
-    @Override
-    public void logout() {
-        if (!StpUtil.isLogin()) {
-            throw new ServiceException("用户未登录", 500);
-        }
-        String userId = StpUtil.getLoginIdAsString();
-        redisCache.deleteObject(userId);
-        StpUtil.logout();
-    }
-
-    /**
-     * 登录用户
-     * @param user
-     * @return
-     */
-    private TokenVo login(SysUser user){
-        // 登录成功
-        StpUtil.login(user.getId());
-        // 生成token
-        String token = StpUtil.getTokenInfo().getTokenValue();
-        TokenVo tokenVo = new TokenVo();
-        BeanUtil.copyProperties(user, tokenVo);
-        tokenVo.setPassword(null);
-        tokenVo.setToken(token);
-        redisCache.setCacheObject(user.getId(), tokenVo);
-        return tokenVo;
+    public String generateAuthCode() {
+        return IdUtil.simpleUUID();
     }
 }

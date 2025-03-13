@@ -1,4 +1,4 @@
-package cn.mu00.tools.controller;
+package cn.mu00.tools.controller.system;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.mu00.tools.common.constant.UserRole;
@@ -77,5 +77,13 @@ public class SysUserController {
     @PutMapping("/resetPwd/{userId}")
     public R<Map<String, String>> resetPwd(@PathVariable String userId){
         return R.ok(sysUserService.resetPwd(userId));
+    }
+
+    /**
+     * 生成授权码
+     */
+    @GetMapping("/generate-code")
+    public R<String> generateCode(){
+        return R.ok(sysUserService.generateAuthCode());
     }
 }
