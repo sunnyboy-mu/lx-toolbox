@@ -15,6 +15,7 @@
     <module>lx-framework</module>
     <module>lx-admin</module>
     <module>lx-common</module>
+    <module>lx-oss</module>
   </modules>
 
   <properties>
@@ -28,6 +29,7 @@
     <mybatis.plus.version>3.5.10.1</mybatis.plus.version>
     <hutool.version>5.8.36</hutool.version>
     <sa.token.version>1.40.0</sa.token.version>
+    <upyun.version>4.2.3</upyun.version>
 
 
     <!-- override dependency version -->
@@ -140,6 +142,13 @@
         <scope>import</scope>
       </dependency>
 
+      <!-- upyun oss -->
+      <dependency>
+        <groupId>com.upyun</groupId>
+        <artifactId>java-sdk</artifactId>
+        <version>${upyun.version}</version>
+      </dependency>
+
 
       <dependency>
         <groupId>cn.mu00</groupId>
@@ -162,6 +171,12 @@
       <dependency>
         <groupId>cn.mu00</groupId>
         <artifactId>lx-system</artifactId>
+        <version>${lx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.mu00</groupId>
+        <artifactId>lx-oss</artifactId>
         <version>${lx.version}</version>
       </dependency>
 

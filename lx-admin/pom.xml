@@ -33,6 +33,12 @@
       <artifactId>lx-framework</artifactId>
     </dependency>
 
+    <!-- OSS模块-->
+    <dependency>
+      <groupId>cn.mu00</groupId>
+      <artifactId>lx-oss</artifactId>
+    </dependency>
+
 
   </dependencies>
 
