@@ -1,104 +1,172 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-50">
-    <div class="w-96 bg-white p-8 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800"
-        >用户登录</h2
-      >
+  <div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div class="w-full max-w-[1200px] bg-white rounded-xl shadow-lg flex overflow-hidden">
+      <!-- 左侧风景照 -->
+      <div class="w-[600px] flex justify-center items-center">
+        <div class="aspect-[16/9] relative h-100">
+          <img
+            src="@/assets/images/login-bg.png"
+            alt="登录背景"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </div>
 
-      <el-tabs v-model="activeTab" stretch class="mb-6">
-        <el-tab-pane label="账号密码" name="password">
-          <el-form
-            :model="loginForm"
-            :rules="rules"
-            class="space-y-4"
-            @submit.prevent="handleLogin"
+      <!-- 右侧登录区域 -->
+      <div class="flex-1 p-8 lg:p-12">
+        <div class="max-w-[360px] mx-auto">
+          <!-- Logo和标题 -->
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900">沐沐物语</h2>
+            <p class="mt-2 text-sm text-gray-600">欢迎登录</p>
+          </div>
+
+          <!-- 登录方式切换器 -->
+          <el-segmented
+            size="large"
+            v-model="loginType"
+            :options="loginOptions"
+            class="w-full mb-6"
           >
-            <el-form-item>
-              <el-input
-                v-model="loginForm.username"
-                placeholder="请输入账号"
-                class="w-full focus:border-primary focus:ring-1 focus:ring-primary"
-              />
-            </el-form-item>
-            <el-form-item>
-              <el-input
-                v-model="loginForm.password"
-                type="password"
-                show-password
-                placeholder="请输入密码"
-                class="w-full focus:border-primary focus:ring-1 focus:ring-primary"
-              />
-            </el-form-item>
-          </el-form>
-        </el-tab-pane>
+            <template #default="{ item }">
+              <div class="flex items-center justify-center gap-2">
+                <el-icon>
+                  <component :is="item.icon" />
+                </el-icon>
+                <span>{{ item.label }}</span>
+              </div>
+            </template>
+          </el-segmented>
 
-        <el-tab-pane label="授权码" name="token">
-          <el-form :model="tokenForm" class="space-y-4">
-            <el-form-item>
+          <!-- 授权码登录表单 -->
+          <el-form
+            v-if="loginType === 'auth'"
+            ref="authFormRef"
+            :model="authForm"
+            :rules="authRules"
+            class="space-y-6"
+            size="large"
+          >
+            <el-form-item prop="authCode">
               <el-input
-                v-model="tokenForm.token"
+                v-model="authForm.authCode"
                 placeholder="请输入授权码"
-                class="w-full focus:border-primary focus:ring-1 focus:ring-primary"
+                :prefix-icon="Key"
               />
             </el-form-item>
+            <el-button type="primary" class="w-full" @click="handleAuthLogin">
+              登录
+            </el-button>
           </el-form>
-        </el-tab-pane>
-      </el-tabs>
 
-      <el-button
-        type="primary"
-        @click="handleLogin"
-        class="w-full bg-primary hover:bg-primary-dark transition-colors"
-      >
-        立即登录
-      </el-button>
+          <!-- 账号密码登录表单 -->
+          <el-form
+            v-else
+            ref="accountFormRef"
+            :model="accountForm"
+            :rules="accountRules"
+            class="space-y-6"
+            size="large"
+          >
+            <el-form-item prop="username">
+              <el-input
+                v-model="accountForm.username"
+                placeholder="请输入用户名"
+                :prefix-icon="User"
+              />
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input
+                v-model="accountForm.password"
+                type="password"
+                placeholder="请输入密码"
+                :prefix-icon="Lock"
+                show-password
+              />
+            </el-form-item>
+            <el-button type="primary" class="w-full" @click="handleAccountLogin">
+              登录
+            </el-button>
+          </el-form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, reactive } from 'vue';
-  import router from '@/router';
-  import { useUserStore } from '@/store/module/user';
+import { ref, reactive } from 'vue'
+import { User, Lock, Key } from '@element-plus/icons-vue'
 
-  const userStore = useUserStore();
-  const activeTab = ref('password');
+// 登录方式选项
+const loginOptions = [
+  {
+    value: 'auth',
+    label: '授权码登录',
+    icon: Key
+  },
+  {
+    value: 'account',
+    label: '账号密码登录',
+    icon: User
+  }
+]
 
-  const loginForm = reactive({
-    username: '',
-    password: ''
-  });
+// 登录方式
+const loginType = ref('auth')
 
-  const tokenForm = reactive({
-    token: ''
-  });
+// 授权码表单
+const authFormRef = ref()
+const authForm = reactive({
+  authCode: ''
+})
+const authRules = {
+  authCode: [
+    { required: true, message: '请输入授权码', trigger: 'blur' },
+    { min: 6, max: 20, message: '授权码长度在 6 到 20 个字符', trigger: 'blur' }
+  ]
+}
 
-  const rules = {
-    username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-    token: [{ required: true, message: '请输入授权码', trigger: 'blur' }]
-  };
+// 账号密码表单
+const accountFormRef = ref()
+const accountForm = reactive({
+  username: '',
+  password: ''
+})
+const accountRules = {
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度在 3 到 20 个字符', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 20, message: '密码长度在 6 到 20 个字符', trigger: 'blur' }
+  ]
+}
 
-  const handleLogin = async () => {
-    try {
-      if (activeTab.value === 'password') {
-        await userStore.loginByPassword(loginForm);
-      } else {
-        await userStore.loginByToken(tokenForm);
-      }
-      ElMessage.success('登录成功');
-      router.push('/');
-    } catch (error) {
-      ElMessage.error(error.message);
+// 授权码登录处理
+const handleAuthLogin = async () => {
+  if (!authFormRef.value) return
+  await authFormRef.value.validate((valid) => {
+    if (valid) {
+      console.log('授权码登录', authForm)
+      // TODO: 实现登录逻辑
     }
-  };
+  })
+}
+
+// 账号密码登录处理
+const handleAccountLogin = async () => {
+  if (!accountFormRef.value) return
+  await accountFormRef.value.validate((valid) => {
+    if (valid) {
+      console.log('账号密码登录', accountForm)
+      // TODO: 实现登录逻辑
+    }
+  })
+}
 </script>
 
-<style scoped>
-  .bg-primary {
-    background-color: var(--el-color-primary);
-  }
-  .bg-primary-dark:hover {
-    background-color: var(--el-color-primary-dark-2);
-  }
+<style scoped lang="scss">
+
 </style>
