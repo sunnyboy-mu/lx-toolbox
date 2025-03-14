@@ -7,6 +7,11 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: () => import('@/views/home/index.vue')
+    },
+    {
+      path: '/image-bed',
+      name: 'ImageBed',
+      component: () => import('@/views/frontend/images-bed/index.vue')
     }
   ],
   history: createWebHistory(),
