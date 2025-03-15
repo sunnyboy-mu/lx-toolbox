@@ -29,6 +29,7 @@
   import { Picture, Upload } from '@element-plus/icons-vue';
   import { onMounted, onUnmounted } from 'vue';
   import Login from './Login.vue';
+  import { imageUpload } from '@/api/image-bed';
 
   const emit = defineEmits(['upload-success']);
 
@@ -56,17 +57,9 @@
 
   const processFiles = (files) => {
     files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        emit('upload-success', {
-          name: file.name,
-          url: e.target.result,
-          size: file.size,
-          type: file.type,
-          date: new Date().toISOString()
-        });
-      };
-      reader.readAsDataURL(file);
+      imageUpload({ file }).then((data) => {
+        emit('upload-success', data);
+      });
     });
   };
 

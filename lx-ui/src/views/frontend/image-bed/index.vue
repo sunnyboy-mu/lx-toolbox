@@ -16,6 +16,7 @@
   import { ElMessage } from 'element-plus/es';
   import ImageUpload from './components/ImageUpload.vue';
   import ImageList from './components/ImageList.vue';
+  import { imageDelete } from '@/api/image-bed';
 
   const imageHistory = useLocalStorage('image-history', []);
 
@@ -27,9 +28,11 @@
     }
   };
 
-  const removeImage = (index) => {
+  const removeImage = (index, row) => {
     imageHistory.value.splice(index, 1);
-    ElMessage.success('已删除图片');
+    imageDelete(row.filePath).then(() => {
+      ElMessage.success('已删除图片');
+    });
   };
 
   const clearHistory = () => {

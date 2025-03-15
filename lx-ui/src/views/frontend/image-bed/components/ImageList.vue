@@ -48,10 +48,14 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="type" label="类型" width="100" />
+        <el-table-column prop="size" label="大小" width="100">
+          <template #default="{ row }">
+            {{ formatFileSize(row.size) }}
+          </template>
+        </el-table-column>
 
         <el-table-column label="操作" width="160">
-          <template #default="{ $index }">
+          <template #default="{ $index, row }">
             <div class="flex gap-2">
               <el-button
                 type="primary"
@@ -66,7 +70,7 @@
                 type="danger"
                 size="small"
                 :icon="Delete"
-                @click="removeImage($index)"
+                @click="removeImage($index, row)"
                 link
               >
                 删除
@@ -80,6 +84,7 @@
 </template>
 
 <script setup>
+  import { formatFileSize } from '@/utils/file-utils';
   import { List, Delete, CopyDocument } from '@element-plus/icons-vue';
 
   const { data } = defineProps({
@@ -106,7 +111,7 @@
     emit('clear');
   };
 
-  const removeImage = (i) => {
-    emit('remove', i);
+  const removeImage = (i, row) => {
+    emit('remove', i, row);
   };
 </script>

@@ -5,8 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: () => import('@/views/home/index.vue')
+      redirect: '/image-bed'
     },
     {
       path: '/image-bed',
