@@ -11,4 +11,5 @@ public interface LoginService {
 
     void logout();
 
+    TokenVo getUserInfo();
 }

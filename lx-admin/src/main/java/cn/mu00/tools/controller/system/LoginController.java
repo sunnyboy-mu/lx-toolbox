@@ -37,8 +37,13 @@ public class LoginController {
      * 退出登录
      */
     @GetMapping("/logout")
-    public R logout() {
+    public R<String> logout() {
         loginService.logout();
         return R.ok(null,"退出成功");
+    }
+
+    @GetMapping("/userInfo.interface")
+    public R<TokenVo> userInfo() {
+        return R.ok(loginService.getUserInfo());
     }
 }

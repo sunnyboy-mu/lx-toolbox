@@ -43,7 +43,7 @@ public class CommonImgServiceImpl implements CommonImgService {
                 checkFileForCommonUser(file);
                 UpYunUtil.upload(UpYunUtil.getUpYunRestManager(ossConfig),filePath,file.getBytes());
             }
-            return new ImageVo(fileName, ossConfig.getCdnDomain() + filePath, filePath);
+            return new ImageVo(fileName, ossConfig.getCdnDomain() + filePath, filePath, file.getSize());
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), 500);
         }

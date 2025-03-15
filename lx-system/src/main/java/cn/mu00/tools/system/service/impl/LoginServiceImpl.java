@@ -68,6 +68,14 @@ public class LoginServiceImpl implements LoginService {
         StpUtil.logout();
     }
 
+    @Override
+    public TokenVo getUserInfo() {
+        if (StpUtil.isLogin()) {
+            return redisCache.getCacheObject(StpUtil.getLoginIdAsString());
+        }
+        return null;
+    }
+
     /**
      * 登录用户
      * @param user

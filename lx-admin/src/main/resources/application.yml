@@ -27,6 +27,10 @@ logging:
 
 # Spring配置
 spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
   profiles:
     active: dev
   # redis 配置
