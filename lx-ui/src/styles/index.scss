@@ -1,7 +1,26 @@
 @use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
+@use 'font.css';
+
+/* 滚动条样式 */
+::-webkit-scrollbar-track-piece {
+  border-radius: 6px;
+  background: #0000001a;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #c1c1c1;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
 * {
   outline: none;
+}
+
+.font-zwzt {
+  font-family: 'ZWZT';
 }
 
 :root {
@@ -11,8 +30,8 @@
 html,
 body {
   margin: 0;
-  min-width: 1200px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: 'ZWZT';
 }
 
 .app-layout {

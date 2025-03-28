@@ -5,6 +5,8 @@ import store from './store';
 import router from './router';
 import '@/styles/element-plus-theme/index.scss';
 import '@/styles/dark.scss';
+import '@/styles/index.scss';
+import 'animate.css';
 import installer from './as-needed';
 
 const app = createApp(App);

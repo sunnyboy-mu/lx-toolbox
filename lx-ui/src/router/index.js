@@ -5,16 +5,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/image-bed'
+      name: 'index',
+      component: () => import('@/views/home/index.vue')
     },
     {
       path: '/image-bed',
-      name: 'ImageBed',
+      name: 'imageBed',
       component: () => import('@/views/frontend/image-bed/index.vue')
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: () => import('@/views/login/index.vue')
     }
   ],
