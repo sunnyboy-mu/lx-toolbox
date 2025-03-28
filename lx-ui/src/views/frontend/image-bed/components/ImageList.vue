@@ -18,9 +18,9 @@
 
     <div class="overflow-y-auto flex-1">
       <el-table :data="data" stripe class="w-full" empty-text="暂无上传记录">
-        <el-table-column label="缩略图" width="120">
+        <el-table-column label="缩略图" width="100">
           <template #default="{ row }">
-            <div class="h-20 max-w-2xs bg-gray-100 rounded overflow-hidden">
+            <div class="h-12 max-w-sm bg-gray-100 rounded overflow-hidden">
               <el-image
                 :src="row.url"
                 class="w-full h-full object-contain"
