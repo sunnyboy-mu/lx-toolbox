@@ -29,15 +29,18 @@
         </p>
 
         <!-- 一言 -->
-        <div class="text-center mt-16 min-h-16">
-          <template v-if="!!hitokotoData.hitokoto">
+        <div class="text-center mt-16 min-h-16 px-2">
+          <div
+            v-if="!!hitokotoData.hitokoto"
+            class="animate__animated animate__fadeInUp"
+          >
             <p class="text-xl">{{ hitokotoData.hitokoto }}</p>
             <p class="mt-2 text-gray-300">
               -「
               <strong>{{ hitokotoData.from }}</strong>
               」
             </p>
-          </template>
+          </div>
         </div>
 
         <!-- 功能 -->
