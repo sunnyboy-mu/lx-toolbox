@@ -48,11 +48,27 @@
               Mu Bed Image
             </router-link>
           </div>
+
+          <!-- docker -->
+
+          <div class="flex justify-center items-center gap-4 mt-16 flex-wrap">
+            <a
+              v-for="(v, i) in dockerData"
+              :key="i"
+              class="bg-white/20 border-2 border-white/20 w-12 h-12 cursor-pointer p-2 rounded-xl duration-300 hover:scale-120 hover:border-[var(--el-color-primary)] hover-shadow-primary"
+              :href="v.link"
+              target="_blank"
+            >
+              <img :src="v.icon" class="w-full h-full object-cover block" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <!-- <div class="home-item bg-blue-400"></div>
-    <div class="home-item bg-amber-300"></div>
+    <div class="home-item">
+      <Weather />
+    </div>
+    <!-- <div class="home-item bg-amber-300"></div>
     <div class="home-item bg-blue-300"></div>
     <div class="home-item bg-amber-300"></div> -->
   </div>
@@ -61,11 +77,31 @@
 <script setup>
   import { hitokoto } from '@/api/home';
   import { ref } from 'vue';
+  import Weather from './Weather.vue';
 
   const hitokotoData = ref({
     hitokoto: '',
     from: ''
   });
+
+  const dockerData = ref([
+    {
+      link: 'https://chat.mu00.cn',
+      icon: 'https://upyun-oss.mu00.cn/2025/03/28//1743150784848.png'
+    },
+    {
+      link: 'https://web.mu00.cn:1314',
+      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214885456.png'
+    },
+    {
+      link: 'https://gitee.com/SunnyBoy_mu',
+      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214888267.png'
+    },
+    {
+      link: 'https://github.com/sunnyboy-mu',
+      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214890448.png'
+    }
+  ]);
 
   hitokoto().then((res) => {
     hitokotoData.value = res;
@@ -77,6 +113,7 @@
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
     color: #fff;
     &::-webkit-scrollbar {
       width: 0;
@@ -89,6 +126,7 @@
     .btn-link {
       &:hover {
         box-shadow: 0 0 35px var(--el-color-primary);
+        letter-spacing: 4px;
       }
     }
   }

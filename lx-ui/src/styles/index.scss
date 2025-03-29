@@ -34,6 +34,10 @@ body {
   font-family: 'ZWZT';
 }
 
+.hover-shadow-primary:hover {
+  box-shadow: 0 0 35px var(--el-color-primary);
+}
+
 .app-layout {
   background: getCssVar('bg-color', 'page');
 
