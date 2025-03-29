@@ -29,13 +29,15 @@
         </p>
 
         <!-- 一言 -->
-        <div class="text-center mt-16">
-          <p class="text-xl">{{ hitokotoData.hitokoto }}</p>
-          <p class="mt-2 text-gray-300">
-            -「
-            <strong>{{ hitokotoData.from }}</strong>
-            」
-          </p>
+        <div class="text-center mt-16 min-h-16">
+          <template v-if="!!hitokotoData.hitokoto">
+            <p class="text-xl">{{ hitokotoData.hitokoto }}</p>
+            <p class="mt-2 text-gray-300">
+              -「
+              <strong>{{ hitokotoData.from }}</strong>
+              」
+            </p>
+          </template>
         </div>
 
         <!-- 功能 -->
