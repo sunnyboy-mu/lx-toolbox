@@ -25,7 +25,7 @@
         <!-- 描述 -->
 
         <p class="text-xl text-gray-300 font-zwzt">
-          予万物以理解，涵万事而有容
+          风吹樱花落，人与樱花错；相逢本无意，花落人终散。
         </p>
 
         <!-- 一言 -->
@@ -46,7 +46,7 @@
         <!-- 功能 -->
         <div class="mt-8">
           <router-link
-            class="border-2 border-white px-4 py-2 rounded-full mr-4 font-bold duration-300 hover:border-[var(--el-color-primary)] hover:bg-black/20 hover:text-[var(--el-color-primary)] btn-link"
+            class="border-2 border-gray-300 px-4 py-2 rounded-full mr-4 font-bold duration-300 text-gray-300 hover:border-[var(--el-color-primary)] hover:bg-black/20 hover:text-[var(--el-color-primary)] btn-link"
             to="/image-bed"
           >
             Mu Bed Image
@@ -59,11 +59,14 @@
           <a
             v-for="(v, i) in dockerData"
             :key="i"
-            class="bg-white/20 border-2 border-white/20 w-12 h-12 cursor-pointer p-2 rounded-xl duration-300 hover:scale-120 hover:border-[var(--el-color-primary)] hover-shadow-primary"
+            class="bg-white/20 border-2 border-white/20 w-12 h-12 cursor-pointer p-2 rounded-xl flex justify-center items-center duration-300 hover:scale-120 hover:border-[var(--el-color-primary)] hover-shadow-primary group"
             :href="v.link"
             target="_blank"
           >
-            <img :src="v.icon" class="w-full h-full object-cover block" />
+            <i
+              class="iconfont !text-2xl text-gray-300 duration-300 group-hover:text-[var(--el-color-primary)]"
+              :class="v.icon"
+            ></i>
           </a>
         </div>
       </div>
@@ -94,19 +97,19 @@
   const dockerData = ref([
     {
       link: 'https://chat.mu00.cn',
-      icon: 'https://upyun-oss.mu00.cn/2025/03/28//1743150784848.png'
+      icon: 'icon-openai-fill'
     },
     {
       link: 'https://web.mu00.cn:1314',
-      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214885456.png'
+      icon: 'icon-a-1panel'
     },
     {
       link: 'https://gitee.com/SunnyBoy_mu',
-      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214888267.png'
+      icon: 'icon-gitee'
     },
     {
       link: 'https://github.com/sunnyboy-mu',
-      icon: 'https://upyun-oss.mu00.cn/2025/03/29//1743214890448.png'
+      icon: 'icon-GitHub'
     }
   ]);
 
