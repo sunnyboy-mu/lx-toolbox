@@ -5,7 +5,6 @@
         <el-icon class="mr-2"><Upload /></el-icon>
         图片上传
       </h2>
-      <Login />
     </div>
 
     <el-upload
@@ -28,7 +27,6 @@
 <script setup>
   import { Picture, Upload } from '@element-plus/icons-vue';
   import { onMounted, onUnmounted } from 'vue';
-  import Login from './Login.vue';
   import { imageUpload } from '@/api/image-bed';
 
   const emit = defineEmits(['upload-success']);

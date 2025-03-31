@@ -1,5 +1,7 @@
 import { createWebHistory } from 'vue-router';
 import { createRouter } from 'vue-router';
+import FrontendLayout from '@/layout/frontend/index.vue';
+import BackendLayout from '@/layout/backend/index.vue';
 
 const router = createRouter({
   routes: [
@@ -9,9 +11,15 @@ const router = createRouter({
       component: () => import('@/views/home/index.vue')
     },
     {
-      path: '/image-bed',
-      name: 'imageBed',
-      component: () => import('@/views/frontend/image-bed/index.vue')
+      path: '/fe',
+      component: FrontendLayout,
+      children: [
+        {
+          path: 'image-bed',
+          name: 'image-bed',
+          component: () => import('@/views/frontend/image-bed/index.vue')
+        }
+      ]
     },
     {
       path: '/login',

@@ -47,9 +47,9 @@
         <div class="mt-8">
           <router-link
             class="border-2 border-gray-300 px-4 py-2 rounded-full mr-4 font-bold duration-300 text-gray-300 hover:border-[var(--el-color-primary)] hover:bg-black/20 hover:text-[var(--el-color-primary)] btn-link"
-            to="/image-bed"
+            to="/fe/image-bed"
           >
-            Mu Bed Image
+            Get Start
           </router-link>
         </div>
 
@@ -59,7 +59,7 @@
           <a
             v-for="(v, i) in dockerData"
             :key="i"
-            class="bg-white/20 border-2 border-white/20 w-12 h-12 cursor-pointer p-2 rounded-xl flex justify-center items-center duration-300 hover:scale-120 hover:border-[var(--el-color-primary)] hover-shadow-primary group"
+            class="bg-white/20 border-2 border-white/20 w-12 h-12 cursor-pointer p-2 rounded-xl flex justify-center items-center duration-300 hover:scale-120 hover:border-[var(--el-color-primary)] hover-shadow-primary hover:bg-white/10 group"
             :href="v.link"
             target="_blank"
           >

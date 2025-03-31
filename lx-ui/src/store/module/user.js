@@ -35,10 +35,16 @@ export const useUserStore = defineStore('user', () => {
 
   const loadUserInfo = async () => {
     const data = await getUserInfo();
-    if (data) {
-      isLoggedIn.value = true;
-      userInfo.value = data;
-    }
+    if (!data) return;
+    isLoggedIn.value = true;
+    userInfo.value = data;
+  };
+
+  const logout = () => {
+    removeToken();
+    isLoggedIn.value = false;
+    userInfo.value = null;
+    ElMessage.success('退出成功');
   };
 
   return {
@@ -47,6 +53,7 @@ export const useUserStore = defineStore('user', () => {
     loginDialogVisible,
     doUserlogin,
     doUserLogout,
-    loadUserInfo
+    loadUserInfo,
+    logout
   };
 });

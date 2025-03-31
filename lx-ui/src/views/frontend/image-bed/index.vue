@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen p-4 bg-gray-50">
+  <div class="flex flex-col flex-1 w-full bg-gray-50 p-4 overflow-hidden">
     <ImageUpload @upload-success="addImageToHistory" class="mb-4" />
 
     <ImageList

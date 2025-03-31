@@ -11,8 +11,8 @@
 
 <script setup>
   import { ref } from 'vue';
-  import UserInfo from './UserInfo.vue';
-  import Weather from './Weather.vue';
+  import UserInfo from './components/UserInfo.vue';
+  import Weather from './components/Weather.vue';
 
   const homeRef = ref(null);
 
@@ -29,6 +29,7 @@
     scroll-behavior: smooth;
     color: #fff;
     background-color: #0a0d1e;
+    font-family: 'ZWZT';
     &::-webkit-scrollbar {
       width: 0;
     }

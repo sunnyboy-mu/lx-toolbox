@@ -31,11 +31,31 @@ html,
 body {
   margin: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-family: 'ZWZT';
 }
 
 .hover-shadow-primary:hover {
   box-shadow: 0 0 35px var(--el-color-primary);
+}
+.iconfont {
+  font-size: inherit;
+}
+
+.lx-admin-menus.el-menu--horizontal {
+  --el-menu-horizontal-height: 32px;
+  border: none !important;
+  & > .el-menu-item {
+    border-radius: 6px;
+    border: none;
+    &.is-active {
+      border: none;
+    }
+    &:focus {
+      background: none !important;
+    }
+  }
+  & > .el-sub-menu.is-active .el-sub-menu__title {
+    border: none;
+  }
 }
 
 .app-layout {
