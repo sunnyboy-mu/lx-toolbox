@@ -29,7 +29,7 @@
         </p>
 
         <!-- 一言 -->
-        <div class="text-center mt-16 min-h-16 px-2">
+        <div class="text-center mt-24 min-h-16 px-2">
           <div
             v-if="!!hitokotoData.hitokoto"
             class="animate__animated animate__fadeInUp"

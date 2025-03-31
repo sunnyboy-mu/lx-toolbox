@@ -5,8 +5,18 @@
     mode="horizontal"
     @select="handleSelect"
   >
-    <el-menu-item index="/">首页</el-menu-item>
-    <el-menu-item index="/fe/image-bed">图床</el-menu-item>
+    <el-menu-item index="/">
+      <div class="flex items-center gap-1">
+        <i class="iconfont icon-home"></i>
+        <span>首页</span>
+      </div>
+    </el-menu-item>
+    <el-menu-item index="/fe/image-bed">
+      <div class="flex items-center gap-1">
+        <i class="iconfont icon-image"></i>
+        <span>图床</span>
+      </div>
+    </el-menu-item>
   </el-menu>
 </template>
 

@@ -1,9 +1,10 @@
 <template>
-  <div class="backend-layout h-screen">
+  <div class="h-screen flex flex-col pt-14">
     <Header />
     <router-view></router-view>
   </div>
 </template>
+
 <script setup>
-  import Header from './components/Header.vue';
+  import Header from '@/components/Header/index.vue';
 </script>
