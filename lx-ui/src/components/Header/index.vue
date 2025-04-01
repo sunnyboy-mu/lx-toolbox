@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-14 fixed top-0 w-full z-50 bg-white flex justify-between items-center px-8"
+    class="py-3 top-0 left-0 sticky w-full bg-white flex justify-between items-center px-8 z-50"
   >
     <div class="flex-1 flex items-center overflow-hidden">
       <Logo class="mr-4 shrink-0" />

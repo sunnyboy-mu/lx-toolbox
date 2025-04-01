@@ -10,7 +10,7 @@
       class="absolute top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center"
     >
       <div
-        class="animate__animated animate__fadeInUp flex flex-col justify-center items-center"
+        class="animate__animated animate__fadeInUp flex flex-col justify-center items-center px-4"
       >
         <!-- 头像 -->
         <img
@@ -24,12 +24,12 @@
 
         <!-- 描述 -->
 
-        <p class="text-xl text-gray-300 font-zwzt">
+        <p class="text-xl text-gray-300 font-zwzt text-center">
           风吹樱花落，人与樱花错；相逢本无意，花落人终散。
         </p>
 
         <!-- 一言 -->
-        <div class="text-center mt-24 min-h-16 px-2">
+        <div class="text-center mt-24 min-h-16">
           <div
             v-if="!!hitokotoData.hitokoto"
             class="animate__animated animate__fadeInUp"

@@ -11,3 +11,11 @@ export function isExternalLink(url) {
       url.startsWith('//'))
   );
 }
+
+/**
+ * 随机颜色
+ * @returns
+ */
+export function randomHexColor() {
+  return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+}
