@@ -5,8 +5,8 @@
     mode="horizontal"
     @select="handleSelect"
   >
-    <template v-for="menu in data">
-      <el-sub-menu :index="menu.path" v-if="menu.children" :key="menu.path">
+    <template v-for="menu in data" :key="menu.path">
+      <el-sub-menu :index="menu.path" v-if="menu.children">
         <template #title>
           <div class="flex items-center gap-1">
             <i class="iconfont" :class="menu.icon"></i>

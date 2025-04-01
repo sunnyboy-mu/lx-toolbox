@@ -44,7 +44,12 @@
     </el-dropdown>
 
     <!-- 登录弹窗 -->
-    <el-dialog v-model="loginDialogVisible">
+    <el-dialog
+      v-model="loginDialogVisible"
+      :width="mobile ? '420px' : '740px'"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+    >
       <LoginForm />
     </el-dialog>
   </div>
@@ -62,6 +67,8 @@
   import { storeToRefs } from 'pinia';
   import { ElMessage, ElMessageBox } from 'element-plus/es';
   import { useRouter, useRoute } from 'vue-router';
+  import { useMobile } from '@/utils/use-mobile';
+  const { mobile } = useMobile();
 
   const route = useRoute();
   const router = useRouter();

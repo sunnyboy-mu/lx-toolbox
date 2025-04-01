@@ -1,7 +1,7 @@
 <template>
   <div class="flex bg-white h-96 overflow-hidden">
     <!-- 左侧风景照 -->
-    <div class="w-80 flex justify-center items-center">
+    <div class="w-80 hidden justify-center items-center md:flex">
       <img
         src="https://upyun-oss.mu00.cn/2025/03/15//1742003309134.png"
         alt="登录背景"
