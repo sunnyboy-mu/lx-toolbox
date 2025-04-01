@@ -32,3 +32,10 @@ export const logout = async (data) => {
 export const getUserInfo = async () => {
   return await request.get('/userInfo.interface');
 };
+
+/**
+ * 系统信息
+ */
+export const systemInfo = async () => {
+  return await request.get('/common/system-info.interface');
+};

@@ -88,7 +88,11 @@
   import { useFormData } from '@/utils/use-form-data';
   import { PROJECT_NAME } from '@/config/setting';
   import { useUserStore } from '@/store/module/user';
+  import { useRouter } from 'vue-router';
+  import { useRoute } from 'vue-router';
   const userStore = useUserStore();
+  const router = useRouter();
+  const route = useRoute();
 
   // 登录方式选项
   const loginOptions = [
@@ -143,7 +147,11 @@
       loading.value = true;
       userStore
         .doUserlogin(form, loginType.value)
-        .then(() => {})
+        .then(() => {
+          if (route.path === '/login') {
+            router.push('/');
+          }
+        })
         .finally(() => {
           loading.value = false;
         });

@@ -16,6 +16,7 @@
     <module>lx-admin</module>
     <module>lx-common</module>
     <module>lx-oss</module>
+    <module>lx-bookmark</module>
   </modules>
 
   <properties>
@@ -177,6 +178,12 @@
       <dependency>
         <groupId>cn.mu00</groupId>
         <artifactId>lx-oss</artifactId>
+        <version>${lx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.mu00</groupId>
+        <artifactId>lx-bookmark</artifactId>
         <version>${lx.version}</version>
       </dependency>
 

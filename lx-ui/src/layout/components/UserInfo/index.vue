@@ -26,8 +26,15 @@
 
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item :icon="Position" command="goToAdmin">
+          <el-dropdown-item
+            :icon="Position"
+            command="goToAdmin"
+            v-if="!route.path.startsWith('/admin')"
+          >
             前往后台
+          </el-dropdown-item>
+          <el-dropdown-item :icon="User" command="userInfo">
+            个人信息
           </el-dropdown-item>
           <el-dropdown-item divided :icon="SwitchButton" command="logout">
             退出系统
@@ -44,12 +51,19 @@
 </template>
 
 <script setup>
-  import { SwitchButton, Position, ArrowDown } from '@element-plus/icons-vue';
+  import {
+    SwitchButton,
+    Position,
+    ArrowDown,
+    User
+  } from '@element-plus/icons-vue';
   import { useUserStore } from '@/store/module/user';
   import LoginForm from '@/components/LoginForm/index.vue';
   import { storeToRefs } from 'pinia';
   import { ElMessage, ElMessageBox } from 'element-plus/es';
-  import { useRouter } from 'vue-router';
+  import { useRouter, useRoute } from 'vue-router';
+
+  const route = useRoute();
   const router = useRouter();
 
   const userStore = useUserStore();
@@ -59,12 +73,13 @@
   const handleCommand = (command) => {
     switch (command) {
       case 'goToAdmin':
-        ElMessage.warning('暂未开放');
+        router.push({ name: 'workplace' });
         break;
       case 'logout':
         handleLogout();
         break;
       default:
+        ElMessage.warning('暂未开放');
         break;
     }
   };
@@ -76,7 +91,7 @@
       type: 'warning'
     })
       .then(() => {
-        userStore.logout();
+        userStore.doUserLogout();
         router.push('/');
       })
       .catch(() => {});

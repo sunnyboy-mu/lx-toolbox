@@ -39,6 +39,12 @@
       <artifactId>lx-oss</artifactId>
     </dependency>
 
+    <!-- bookmark模块-->
+    <dependency>
+      <groupId>cn.mu00</groupId>
+      <artifactId>lx-bookmark</artifactId>
+    </dependency>
+
 
   </dependencies>
 

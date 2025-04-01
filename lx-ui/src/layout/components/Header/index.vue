@@ -5,7 +5,7 @@
     <div class="flex-1 flex items-center overflow-hidden">
       <Logo class="mr-4 shrink-0" />
       <div class="flex-1 overflow-hidden">
-        <NavMenu />
+        <NavMenu :data="menuData" />
       </div>
     </div>
     <div class="ml-4 shrink-0">
@@ -14,7 +14,11 @@
   </div>
 </template>
 <script setup>
-  import Logo from '@/components/Logo/index.vue';
-  import UserInfo from '@/components/UserInfo/index.vue';
-  import NavMenu from '@/components/NavMenu/index.vue';
+  import Logo from '../Logo/index.vue';
+  import UserInfo from '../UserInfo/index.vue';
+  import NavMenu from '../NavMenu/index.vue';
+
+  const { menuData } = defineProps({
+    menuData: Array
+  });
 </script>
