@@ -47,6 +47,21 @@
           resize="none"
         />
       </el-form-item>
+      <el-form-item label="状态" prop="status">
+        <el-switch
+          v-model="form.status"
+          inline-prompt
+          style="
+            --el-switch-on-color: #13ce66;
+            --el-switch-off-color: #ff4949;
+            margin-top: 2px;
+          "
+          active-text="显示"
+          inactive-text="隐藏"
+          :active-value="0"
+          :inactive-value="1"
+        />
+      </el-form-item>
     </el-form>
 
     <el-image-viewer
@@ -100,7 +115,8 @@
     url: '',
     icon: 'auto',
     description: '',
-    groupId: ''
+    groupId: '',
+    status: 0
   });
 
   const groupData = inject('group-data');

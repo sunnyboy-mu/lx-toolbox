@@ -18,6 +18,20 @@
       <el-table-column prop="title" label="网站标题" />
       <el-table-column prop="url" label="网址" />
       <el-table-column prop="description" label="描述" show-overflow-tooltip />
+      <el-table-column prop="status" label="状态" width="100">
+        <template #default="{ row }">
+          <el-tag
+            size="small"
+            disable-transitions
+            v-if="row.status === 0"
+            type="success"
+            >显示</el-tag
+          >
+          <el-tag size="small" disable-transitions v-else type="danger"
+            >隐藏</el-tag
+          >
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="220">
         <template #default="{ row }">
           <el-button :icon="Position" link @click="previewUrl(row)">
