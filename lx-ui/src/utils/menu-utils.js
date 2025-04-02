@@ -1,9 +1,10 @@
 import adminRoutes from '@/router/admin-routes';
+import frontRoutes from '@/router/front-routes';
 
 /**
  * 特殊菜单
  */
-const SPECIAL_MENUS = [];
+const SPECIAL_MENUS = ['bookmark'];
 
 /**
  * 生成前台菜单
@@ -11,24 +12,12 @@ const SPECIAL_MENUS = [];
  * @returns
  */
 export function generateFrontEndMenu(systemInfo) {
-  const menu = [];
-
-  menu.push({
+  const menu = generateMenu(frontRoutes, systemInfo);
+  menu.unshift({
     title: '首页',
     path: '/',
     icon: 'icon-home'
   });
-
-  menu.push({
-    title: '图床',
-    path: '/fe/image-bed',
-    icon: 'icon-image'
-  });
-
-  if (systemInfo?.bookmark?.length) {
-    menu.push(generateBookmarkMenu(systemInfo.bookmark));
-  }
-
   return menu;
 }
 
@@ -38,19 +27,7 @@ export function generateFrontEndMenu(systemInfo) {
  * @returns
  */
 export function generateAdminMenu(systemInfo) {
-  const menu = [];
-
-  adminRoutes.forEach((route) => {
-    route.children?.forEach((child) => {
-      menu.push({
-        title: child.meta.title,
-        path: `${route.path}/${child.path}`,
-        icon: child.meta.icon
-      });
-    });
-  });
-
-  return menu;
+  return generateMenu(adminRoutes, systemInfo);
 }
 
 /**
@@ -69,4 +46,43 @@ function generateBookmarkMenu(data = []) {
       icon: v.icon ?? ['icon-kaifa', 'icon-zonghekongzhitai'][i % 2]
     }))
   };
+}
+
+function generateMenu(routes, systemInfo) {
+  const menu = [];
+  routes.forEach((route) => {
+    route.children?.forEach((child) => {
+      const item = {
+        title: child.meta.title,
+        path: `${route.path}/${child.path}`,
+        icon: child.meta.icon
+      };
+      if (child.children) {
+        item.children = generateMenu([child], systemInfo).flat();
+      }
+      if (SPECIAL_MENUS.some((v) => child.path.startsWith(v))) {
+        handleSpecialMenu(item, systemInfo);
+      }
+      menu.push(item);
+    });
+  });
+  return menu;
+}
+
+/**
+ * 处理特殊菜单
+ */
+function handleSpecialMenu(route, systemInfo) {
+  route.path = route.path.substring(route.path.lastIndexOf('/'), -1);
+
+  const key = SPECIAL_MENUS.find((v) => route.path.includes(v));
+  if (!systemInfo || !systemInfo[key] || !systemInfo[key]?.length) {
+    return;
+  }
+
+  route.children = systemInfo[key].map((v) => ({
+    title: v.name,
+    path: `${route.path}/${v.id}`,
+    icon: v.icon
+  }));
 }

@@ -3,3 +3,7 @@
 @theme {
   --color-primary: var(--el-color-primary);
 }
+
+.lx-page {
+  @apply bg-white rounded-md p-2 h-full flex-1;
+}

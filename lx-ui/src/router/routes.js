@@ -1,11 +1,12 @@
 import adminRoutes from './admin-routes';
 import frontRoutes from './front-routes';
+import Home from '@/views/home/index.vue';
 
 const routes = [
   {
     path: '/',
     name: 'index',
-    component: () => import('@/views/home/index.vue')
+    component: Home
   },
   {
     path: '/login',
