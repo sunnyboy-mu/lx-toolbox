@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mu00.tools.bookmark.mapper.BmInfoMapper">
+
+  <resultMap type="cn.mu00.tools.bookmark.domain.vo.BookmarkVo" id="BookmarkResult">
+    <id     property="groupId"      column="group_id"      />
+    <result property="groupTitle"    column="group_title"    />
+    <result property="groupStatus"     column="group_status"     />
+    <collection property="bmInfoList" ofType="cn.mu00.tools.bookmark.domain.BmInfo" >
+      <id     property="id"      column="id"      />
+      <result property="title"    column="title"    />
+      <result property="url"     column="url"     />
+      <result property="icon"     column="icon"     />
+      <result property="description"     column="description"     />
+    </collection>
+  </resultMap>
+
+  <select id="listBookmarkVo" resultMap="BookmarkResult">
+    SELECT
+      bmg.id AS group_id,
+      bmg.title AS group_title,
+      bmg.`status` AS group_status,
+      bmi.id AS id,
+      bmi.title AS title,
+      bmi.url AS url,
+      bmi.icon AS icon,
+      bmi.description AS description
+    FROM
+      bm_group AS bmg
+        LEFT JOIN bm_info AS bmi ON bmg.id = bmi.group_id
+        AND bmi.is_deleted = 0
+        AND bmi.`status` = 0
+    WHERE
+      bmg.category_id = #{categoryId}
+      AND bmg.is_deleted = 0
+      AND bmg.`status` IN
+          <foreach item="status" collection="statusList" open="(" separator="," close=")">
+            #{status}
+          </foreach>
+  </select>
+
+</mapper>

@@ -1,11 +1,14 @@
 package cn.mu00.tools.controller.bookmark;
 
 import cn.mu00.tools.bookmark.domain.BmInfo;
+import cn.mu00.tools.bookmark.domain.vo.BookmarkVo;
 import cn.mu00.tools.bookmark.service.BmInfoService;
 import cn.mu00.tools.common.domain.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/bm/info")
 @RestController
@@ -38,5 +41,9 @@ public class BmInfoController {
         return R.ok("删除成功！");
     }
 
+    @GetMapping("/list/{categoryId}.interface")
+    public R<List<BookmarkVo>> list(@PathVariable String categoryId){
+        return R.ok(bmInfoService.listBookmarkVo(categoryId));
+    }
 
 }

@@ -26,7 +26,6 @@ public class BmGroupServiceImpl extends ServiceImpl<BmGroupMapprt, BmGroup> impl
 
     @Override
     public String deleteById(String id) {
-        // TODO 校验该分组下是否还有书签
         long count = bmInfoService.count(new LambdaQueryWrapper<BmInfo>().eq(BmInfo::getGroupId, id));
         if (count > 0) {
             throw new ServiceException("该分组下还有书签，无法删除！");
