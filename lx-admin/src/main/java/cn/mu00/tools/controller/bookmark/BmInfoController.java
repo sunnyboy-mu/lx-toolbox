@@ -1,6 +1,7 @@
 package cn.mu00.tools.controller.bookmark;
 
 import cn.mu00.tools.bookmark.domain.BmInfo;
+import cn.mu00.tools.bookmark.domain.vo.BmInfoVo;
 import cn.mu00.tools.bookmark.domain.vo.BookmarkVo;
 import cn.mu00.tools.bookmark.service.BmInfoService;
 import cn.mu00.tools.common.domain.R;
@@ -19,8 +20,8 @@ public class BmInfoController {
 
 
     @GetMapping("/page")
-    public R<Page<BmInfo>> page(Page<BmInfo> page, BmInfo bmInfo){
-        return R.ok(bmInfoService.page(page, bmInfo));
+    public R<Page<BmInfo>> page(Page<BmInfo> page, BmInfoVo bmInfoVo){
+        return R.ok(bmInfoService.page(page, bmInfoVo));
     }
 
     @PostMapping
