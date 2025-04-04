@@ -77,6 +77,9 @@
   import { ElMessageBox, ElMessage } from 'element-plus/es';
   import { pageBmInfo, removeBmInfo } from '@/api/bookmark';
   import BookmarkEdit from './BookmarkEdit.vue';
+  import { useRoute } from 'vue-router';
+
+  const route = useRoute();
 
   const props = defineProps({
     groupId: String
@@ -94,10 +97,12 @@
   };
 
   const loadTableData = async () => {
+    const category = route.params.category;
     const data = await pageBmInfo({
       current: page.value,
       size: size.value,
-      groupId: props.groupId
+      groupId: props.groupId,
+      categoryId: category
     });
     total.value = data.total;
     tableData.value = data.records;
@@ -108,8 +113,6 @@
   };
 
   const handleRemove = (row) => {
-    console.log(111);
-
     ElMessageBox.confirm(`确认删除《${row.title}》的书签吗？`, '提示', {
       type: 'warning'
     })
@@ -129,5 +132,7 @@
     visible.value = true;
   };
 
-  watch(() => props.groupId, reload, { immediate: true });
+  watch([() => props.groupId, () => route.params.category], reload, {
+    immediate: true
+  });
 </script>
