@@ -18,16 +18,21 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="网址URL" prop="url">
+        <el-input v-model="form.url" placeholder="请输入网址URL" clearable>
+          <template #append>
+            <el-button :icon="Search" @click="searchWebSiteInfo" />
+          </template>
+        </el-input>
+      </el-form-item>
       <el-form-item label="网站标题" prop="title">
         <el-input v-model="form.title" placeholder="请输入网站标题" clearable />
       </el-form-item>
-      <el-form-item label="网址URL" prop="url">
-        <el-input v-model="form.url" placeholder="请输入网址URL" clearable />
-      </el-form-item>
+
       <el-form-item label="图标" prop="icon">
         <el-input
           v-model="form.icon"
-          placeholder="请输入ICON地址或“auto”"
+          placeholder="请输入ICON地址或“auto”(自动获取)"
           clearable
         >
           <template #append>
@@ -83,7 +88,7 @@
   import { addBmInfo, updateBmInfo } from '@/api/bookmark';
   import { useFormData } from '@/utils/use-form-data';
   import { inject, ref, watch, reactive } from 'vue';
-  import { View } from '@element-plus/icons-vue';
+  import { View, Search } from '@element-plus/icons-vue';
   import { ElMessage } from 'element-plus/es';
   import { isExternalLink } from '@/utils/common';
   import { AUTO_ICON_URL } from '@/config/setting';
@@ -146,6 +151,24 @@
     previewIconUrl.value =
       form.icon === 'auto' ? AUTO_ICON_URL + form.url : form.icon;
     showPreview.value = true;
+  };
+
+  /**
+   * 搜索网站信息，如标题、描述、图标等
+   */
+  const searchWebSiteInfo = async () => {
+    if (!form.url)
+      return ElMessage.error('请先输入URL后，再尝试自动获取站点信息！');
+    try {
+      const data = await fetch(
+        `https://mu00.cn/so/tdk/index.php?r=${form.url}`
+      ).then((r) => r.json());
+      setFieldValue('title', data.title);
+      setFieldValue('description', data.description);
+      setFieldValue('icon', data.ico);
+    } catch (error) {
+      ElMessage.error('自动获取网站信息失败，请手动填写！');
+    }
   };
 
   watch(visible, (val) => {
