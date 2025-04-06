@@ -22,4 +22,6 @@ public class BmGroup extends BaseEntity {
 
     @TableField("category_id")
     private String categoryId;
+
+    private Integer sort; // 排序
 }

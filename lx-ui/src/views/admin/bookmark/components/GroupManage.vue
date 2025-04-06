@@ -17,6 +17,7 @@
           <template #content>
             <div class="max-w-52 text-gray-500">
               <p>点击标题前的图标可以切换分组状态</p>
+              <p>支持拖拽排序哦ヾ(≧▽≦*)o</p>
               <div class="flex flex-col">
                 <div class="flex items-center gap-2">
                   <el-icon
@@ -56,113 +57,124 @@
       </div>
     </template>
     <el-scrollbar class="h-full">
-      <div class="grid grid-cols-1 gap-2">
-        <div
-          class="bg-gray-100 rounded-md p-2 h-10 flex items-center text-gray-600 group"
-          v-for="(item, i) in groupList"
-          :key="item.id"
-        >
-          <div class="truncate flex-1 text-xs">
-            <el-input
-              size="small"
-              v-model="item.title"
-              v-if="item.isEdit"
-              maxlength="12"
-              placeholder="请输入分组名称"
-              @keydown.enter="handleSubmit(item, i)"
-            />
-            <div v-else class="flex items-center">
-              <el-icon
-                class="cursor-pointer"
-                color="var(--el-color-primary)"
-                v-if="item.status === 0"
-                @click="handleStatusChange(item, 2)"
-              >
-                <Star />
-              </el-icon>
-              <el-icon
-                class="cursor-pointer"
-                color="var(--el-color-danger)"
-                v-if="item.status === 1"
-                @click="handleStatusChange(item, 0)"
-              >
-                <CircleClose />
-              </el-icon>
-              <el-icon
-                class="cursor-pointer"
-                color="var(--el-color-success)"
-                v-if="item.status === 2"
-                @click="handleStatusChange(item, 1)"
-              >
-                <StarFilled />
-              </el-icon>
-              <span class="ml-1">{{ item.title }}</span>
-            </div>
-          </div>
-          <div class="shrink-0 w-16 ml-2">
-            <div class="hidden group-hover:block" v-if="item.status !== 1">
-              <template v-if="!item.isEdit">
-                <el-button
-                  type="primary"
-                  :icon="Edit"
-                  circle
-                  size="small"
-                  @click="item.isEdit = true"
-                  :disabled="addBtnDisabled"
-                />
-                <el-popconfirm
-                  title="是否确定删除该分组？"
-                  placement="left"
-                  confirm-button-text="是"
-                  cancel-button-text="否"
-                  width="120"
-                  confirm-button-type="danger"
-                  @confirm="handleDelete(item, i)"
+      <Draggable
+        ghost-class="ghost-group-item"
+        :animation="200"
+        class="grid grid-cols-1 gap-2"
+        v-model="groupList"
+        group="groupList"
+        @end="handleSortEnd"
+        item-key="id"
+      >
+        <template #item="{ element: item }">
+          <div
+            class="bg-gray-100 rounded-md p-2 h-10 flex items-center text-gray-600 group"
+            :key="item.id"
+          >
+            <div class="truncate flex-1 text-xs">
+              <el-input
+                size="small"
+                v-model="item.title"
+                v-if="item.isEdit"
+                maxlength="12"
+                placeholder="请输入分组名称"
+                @keydown.enter="handleSubmit(item, i)"
+              />
+              <div v-else class="flex items-center">
+                <el-icon
+                  class="cursor-pointer"
+                  color="var(--el-color-primary)"
+                  v-if="item.status === 0"
+                  @click="handleStatusChange(item, 2)"
                 >
-                  <template #reference>
-                    <el-button
-                      type="danger"
-                      :icon="Delete"
-                      circle
-                      size="small"
-                    />
-                  </template>
-                </el-popconfirm>
-              </template>
-              <template v-else>
-                <el-button
-                  type="success"
-                  :icon="Check"
-                  circle
-                  size="small"
-                  @click="handleSubmit(item, i)"
-                />
-                <el-button
-                  type="danger"
-                  :icon="Close"
-                  circle
-                  size="small"
-                  @click="handleClose(item, i)"
-                />
-              </template>
+                  <Star />
+                </el-icon>
+                <el-icon
+                  class="cursor-pointer"
+                  color="var(--el-color-danger)"
+                  v-if="item.status === 1"
+                  @click="handleStatusChange(item, 0)"
+                >
+                  <CircleClose />
+                </el-icon>
+                <el-icon
+                  class="cursor-pointer"
+                  color="var(--el-color-success)"
+                  v-if="item.status === 2"
+                  @click="handleStatusChange(item, 1)"
+                >
+                  <StarFilled />
+                </el-icon>
+                <span class="ml-1">{{ item.title }}</span>
+              </div>
+            </div>
+            <div class="shrink-0 w-16 ml-2">
+              <div class="hidden group-hover:block" v-if="item.status !== 1">
+                <template v-if="!item.isEdit">
+                  <el-button
+                    type="primary"
+                    :icon="Edit"
+                    circle
+                    size="small"
+                    @click="item.isEdit = true"
+                    :disabled="addBtnDisabled"
+                  />
+                  <el-popconfirm
+                    title="是否确定删除该分组？"
+                    placement="left"
+                    confirm-button-text="是"
+                    cancel-button-text="否"
+                    width="120"
+                    confirm-button-type="danger"
+                    @confirm="handleDelete(item, i)"
+                  >
+                    <template #reference>
+                      <el-button
+                        type="danger"
+                        :icon="Delete"
+                        circle
+                        size="small"
+                      />
+                    </template>
+                  </el-popconfirm>
+                </template>
+                <template v-else>
+                  <el-button
+                    type="success"
+                    :icon="Check"
+                    circle
+                    size="small"
+                    @click="handleSubmit(item, i)"
+                  />
+                  <el-button
+                    type="danger"
+                    :icon="Close"
+                    circle
+                    size="small"
+                    @click="handleClose(item, i)"
+                  />
+                </template>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          @click="handleAddItem"
-          class="bg-gray-100 rounded-md p-2 flex items-center text-xs justify-center duration-300"
-          :class="[
-            addBtnDisabled
-              ? 'cursor-not-allowed text-gray-400 '
-              : 'text-gray-700 cursor-pointer hover:bg-primary/20 hover:text-primary '
-          ]"
-        >
-          <el-icon class="mr-2">
-            <CirclePlus />
-          </el-icon>
-          <span>添加一个</span>
-        </div>
-      </div>
+        </template>
+        <template #footer>
+          <div
+            @click="handleAddItem"
+            class="bg-gray-100 rounded-md p-2 flex items-center text-xs justify-center duration-300"
+            :class="[
+              addBtnDisabled
+                ? 'cursor-not-allowed text-gray-400 '
+                : 'text-gray-700 cursor-pointer hover:bg-primary/20 hover:text-primary '
+            ]"
+          >
+            <el-icon class="mr-2">
+              <CirclePlus />
+            </el-icon>
+            <span>添加一个</span>
+          </div>
+        </template>
+      </Draggable>
     </el-scrollbar>
   </el-drawer>
 </template>
@@ -170,6 +182,7 @@
 <script setup>
   import { ref, watch, computed } from 'vue';
   import { cloneDeep } from 'lodash-es';
+  import Draggable from 'vuedraggable';
   import {
     Delete,
     Edit,
@@ -184,7 +197,8 @@
   import {
     addBmGroup,
     removeBmGroup,
-    updateBmGroup
+    updateBmGroup,
+    updateBmGroupSort
   } from '@/api/bookmark/group';
   import { ElMessage } from 'element-plus/es';
   import { useRoute } from 'vue-router';
@@ -261,6 +275,15 @@
     });
   };
 
+  const handleSortEnd = ({ newIndex, oldIndex }) => {
+    const start = Math.min(newIndex, oldIndex);
+    const end = Math.max(newIndex, oldIndex);
+    const ids = groupList.value.slice(start, end + 1).map((v) => v.id);
+    updateBmGroupSort(ids).then((msg) => {
+      ElMessage.success(msg);
+    });
+  };
+
   watch(visible, (val) => {
     if (val) {
       groupList.value = cloneDeep(props.data).map((v) => ({
@@ -271,3 +294,9 @@
     }
   });
 </script>
+
+<style>
+  .ghost-group-item {
+    background-color: var(--el-color-primary-light-9);
+  }
+</style>

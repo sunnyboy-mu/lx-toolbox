@@ -22,7 +22,7 @@ public class BmGroupController {
 
     @PostMapping
     public R<BmGroup> add(@RequestBody BmGroup bmGroup) {
-        bmGroupService.save(bmGroup);
+        bmGroupService.add(bmGroup);
         return R.ok(bmGroup);
     }
 
@@ -35,5 +35,10 @@ public class BmGroupController {
     @DeleteMapping("/{id}")
     public R<String> delete(@PathVariable String id) {
         return R.ok(bmGroupService.deleteById(id));
+    }
+
+    @PutMapping("sort")
+    public R<String> sort(@RequestBody List<String> bmGroupIds) {
+        return R.ok(bmGroupService.sort(bmGroupIds));
     }
 }

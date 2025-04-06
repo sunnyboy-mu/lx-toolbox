@@ -39,6 +39,7 @@
           <foreach item="status" collection="statusList" open="(" separator="," close=")">
             #{status}
           </foreach>
+    ORDER BY bmg.sort
   </select>
 
 </mapper>

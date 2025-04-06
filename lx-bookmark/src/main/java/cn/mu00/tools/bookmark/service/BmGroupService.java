@@ -9,4 +9,10 @@ public interface BmGroupService extends IService<BmGroup> {
     List<BmGroup> listByCategoryId(String categoryId);
 
     String deleteById(String id);
+
+    Integer getNextSortValue(String categoryId);
+
+    BmGroup add(BmGroup bmGroup);
+
+    String sort(List<String> bmGroupIds);
 }

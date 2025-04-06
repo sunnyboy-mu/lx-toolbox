@@ -27,3 +27,11 @@ export const updateBmGroup = async (data) => {
 export const removeBmGroup = async (id) => {
   return await request.delete(`/bm/group/${id}`);
 };
+
+/**
+ * 调整分组排序
+ * @param groupIds {Array} 分组id数组
+ */
+export const updateBmGroupSort = async (groupIds) => {
+  return await request.put(`/bm/group/sort`, groupIds);
+};
