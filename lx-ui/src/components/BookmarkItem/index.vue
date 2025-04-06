@@ -6,12 +6,7 @@
   >
     <div class="flex items-center mb-2">
       <div class="p-2 bg-gray-200 rounded-md shrink-0 mr-2">
-        <el-image
-          v-if="icon"
-          class="w-6 h-6 !block rounded-md"
-          lazy
-          :src="icon"
-        >
+        <el-image class="w-6 h-6 !block rounded-md" lazy :src="iconUrl">
           <template #placeholder>
             <img src="/loading.webp" class="w-6 h-6 !block rounded-md" />
           </template>
@@ -24,12 +19,6 @@
             </div>
           </template>
         </el-image>
-        <div
-          v-else
-          class="w-6 h-6 bg-primary text-center text-white font-bold rounded-md"
-        >
-          {{ title?.slice(0, 1) ?? '沐' }}
-        </div>
       </div>
       <div class="text-base font-bold truncate flex-1 text-gray-800">
         {{ title }}
@@ -46,6 +35,8 @@
   </a>
 </template>
 <script setup>
+  import { computed } from 'vue';
+  import { AUTO_ICON_URL } from '@/config/setting';
   import { randomHexColor } from '@/utils/common';
 
   const { title, url, icon, description } = defineProps({
@@ -53,5 +44,9 @@
     url: String,
     icon: String,
     description: String
+  });
+
+  const iconUrl = computed(() => {
+    return icon === 'auto' ? AUTO_ICON_URL + url : icon;
   });
 </script>

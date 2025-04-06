@@ -1,21 +1,21 @@
 <template>
   <div class="flex-1 p-4 bg-gray-100">
-    <Group />
+    <Group :data="groupList" />
     <div class="flex flex-col gap-4">
       <BookmarkGroup
-        v-for="i in 10"
-        :key="i"
-        title="常用网站"
-        :id="i"
-        :hihg-level="i % 2 === 0"
+        v-for="group in bookmarkList"
+        :key="group.groupId"
+        :title="group.groupTitle"
+        :id="group.groupId"
+        :hihg-level="group.groupStatus === 2"
       >
         <BookmarkItem
-          title="微信小程序文档"
-          url="https://developers.weixin.qq.com/miniprogram/dev/framework/"
-          icon="https://res.wx.qq.com/a/wx_fed/assets/res/OTE0YTAw.png"
-          description="微信小程序官方开发者文档"
-          v-for="i in 10"
-          :key="i"
+          :title="bmInfo.title"
+          :url="bmInfo.url"
+          :icon="bmInfo.icon"
+          :description="bmInfo.description"
+          v-for="bmInfo in group.bmInfoList"
+          :key="bmInfo.id"
         />
       </BookmarkGroup>
     </div>
@@ -29,11 +29,18 @@
   import { useRoute } from 'vue-router';
   import { watch, ref } from 'vue';
   import Group from './components/Group.vue';
+  import { listBookmark } from '@/api/bookmark';
 
   const route = useRoute();
 
-  const loadBookmark = ({ category }) => {
-    console.log('load bookmark', category);
+  const bookmarkList = ref([]);
+
+  const groupList = ref([]);
+
+  const loadBookmark = async ({ category }) => {
+    const data = await listBookmark(category);
+    groupList.value = data;
+    bookmarkList.value = data.filter((v) => !!v.bmInfoList?.length);
   };
 
   watch(

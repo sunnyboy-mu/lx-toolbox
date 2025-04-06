@@ -27,3 +27,11 @@ export const updateBmInfo = async (data) => {
 export const removeBmInfo = async (id) => {
   return await request.delete(`/bm/info/${id}`);
 };
+
+/**
+ * 书签列表
+ * @param {String} categoryId 分类ID
+ */
+export const listBookmark = async (categoryId) => {
+  return await request.get(`/bm/info/list/${categoryId}.interface`);
+};
