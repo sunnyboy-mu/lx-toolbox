@@ -66,7 +66,7 @@
         @end="handleSortEnd"
         item-key="id"
       >
-        <template #item="{ element: item }">
+        <template #item="{ element: item, index: i }">
           <div
             class="bg-gray-100 rounded-md p-2 h-10 flex items-center text-gray-600 group"
             :key="item.id"
