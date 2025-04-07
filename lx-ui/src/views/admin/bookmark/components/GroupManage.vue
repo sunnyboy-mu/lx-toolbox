@@ -76,7 +76,7 @@
                 size="small"
                 v-model="item.title"
                 v-if="item.isEdit"
-                maxlength="12"
+                maxlength="20"
                 placeholder="请输入分组名称"
                 @keydown.enter="handleSubmit(item, i)"
               />
