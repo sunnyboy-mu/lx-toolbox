@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 p-4 bg-gray-100">
-    <Group :data="groupList" />
+    <Group v-if="groupList.length" :data="groupList" />
     <div class="flex flex-col gap-4">
       <BookmarkGroup
         v-for="group in bookmarkList"

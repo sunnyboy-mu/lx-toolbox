@@ -150,6 +150,8 @@
         .then(() => {
           if (route.path === '/login') {
             router.push('/');
+          } else {
+            window.location.reload();
           }
         })
         .finally(() => {

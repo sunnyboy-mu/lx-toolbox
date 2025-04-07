@@ -96,6 +96,10 @@
 
   const dockerData = ref([
     {
+      link: 'https://blog.mu00.cn',
+      icon: 'icon-blogger'
+    },
+    {
       link: 'https://chat.mu00.cn',
       icon: 'icon-openai-fill'
     },
