@@ -6,6 +6,8 @@
     <div class="home-item">
       <Weather />
     </div>
+    <!-- 特效 -->
+    <SpecialEffects />
   </div>
 </template>
 
@@ -13,6 +15,7 @@
   import { ref } from 'vue';
   import UserInfo from './components/UserInfo.vue';
   import Weather from './components/Weather.vue';
+  import SpecialEffects from './components/SpecialEffects.vue';
 
   const homeRef = ref(null);
 
