@@ -5,5 +5,5 @@
 }
 
 .lx-page {
-  @apply bg-white rounded-md p-2 h-full flex-1;
+  @apply bg-white rounded-md p-2 h-full flex-1 min-h-0;
 }

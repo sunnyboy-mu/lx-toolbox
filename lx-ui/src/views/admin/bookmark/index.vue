@@ -1,7 +1,7 @@
 <template>
   <div class="lx-page flex">
     <div
-      class="w-40 -ml-2 flex flex-col"
+      class="w-40 -ml-2 flex flex-col grow-0 shrink-0"
       v-loading="loading"
       element-loading-text="加载中"
     >

@@ -1,9 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="h-screen flex flex-col overflow-hidden">
     <Header :menu-data="backMenu" />
-    <div
-      class="flex-1 bg-gray-100 p-4 overflow-y-auto overflow-x-hidden flex flex-col"
-    >
+    <div class="flex-1 bg-gray-100 p-4 flex flex-col overflow-hidden">
       <router-view></router-view>
     </div>
   </div>

@@ -1,10 +1,11 @@
 <template>
-  <div class="pl-2 h-full flex flex-col">
+  <div class="pl-2 flex-1 flex flex-col overflow-hidden">
     <div class="table-tools mb-2">
       <el-button type="primary" :icon="Plus" @click="openEdit">
         新增
       </el-button>
     </div>
+
     <el-table class="flex-1" stripe :data="tableData" width="100%">
       <el-table-column
         type="index"
@@ -50,6 +51,7 @@
         </template>
       </el-table-column>
     </el-table>
+
     <div class="table-agination pt-2 flex justify-center">
       <el-pagination
         v-model:current-page="page"
