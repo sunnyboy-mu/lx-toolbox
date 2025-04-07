@@ -14,6 +14,7 @@
       <result property="url"     column="url"     />
       <result property="icon"     column="icon"     />
       <result property="description"     column="description"     />
+      <result property="tags"     column="tags"     />
     </collection>
   </resultMap>
 
@@ -26,7 +27,8 @@
       bmi.title AS title,
       bmi.url AS url,
       bmi.icon AS icon,
-      bmi.description AS description
+      bmi.description AS description,
+      bmi.tags as tags
     FROM
       bm_group AS bmg
         LEFT JOIN bm_info AS bmi ON bmg.id = bmi.group_id

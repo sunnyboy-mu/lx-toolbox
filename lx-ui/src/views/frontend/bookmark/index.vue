@@ -14,6 +14,7 @@
           :url="bmInfo.url"
           :icon="bmInfo.icon"
           :description="bmInfo.description"
+          :tags="bmInfo.tags"
           v-for="bmInfo in group.bmInfoList"
           :key="bmInfo.id"
         />

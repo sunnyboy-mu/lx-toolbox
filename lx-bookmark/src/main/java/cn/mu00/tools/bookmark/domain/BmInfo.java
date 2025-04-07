@@ -26,6 +26,8 @@ public class BmInfo extends BaseEntity {
 
     private String description;
 
+    private String tags;
+
     @TableField("group_id")
     private String groupId;
 }
