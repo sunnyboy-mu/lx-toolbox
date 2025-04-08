@@ -7,8 +7,6 @@
 </template>
 <script setup>
   const options = {
-    autoPlay: true,
-    clear: true,
     particles: {
       number: {
         value: 120 // 颗粒数量
@@ -20,7 +18,10 @@
         type: 'image', // 颗粒类型：图片
         options: {
           image: {
-            src: 'https://upyun-oss.mu00.cn/2025/04/07//1744021089642.png', // 图片路径
+            // 雪花
+            // src: 'https://upyun-oss.mu00.cn/2025/04/07//1744021064287.png',
+            // 樱花
+            src: 'https://upyun-oss.mu00.cn/2025/04/08//1744074652789.png',
             width: 10,
             height: 10,
             replaceColor: false
@@ -28,11 +29,10 @@
         }
       },
       size: {
-        value: 10, // 颗粒尺寸
-        random: true // 随机尺寸
-      },
-      line_linked: {
-        enable: false // 禁用连线
+        value: { min: 2, max: 10 },
+        animation: {
+          startValue: 'random'
+        }
       },
       move: {
         enable: true, // 启用移动
@@ -43,20 +43,7 @@
     },
     interactivity: {
       events: {
-        onhover: {
-          enable: false // 禁用鼠标悬停事件
-        },
-        onclick: {
-          enable: false, // 启用点击事件
-          mode: 'push' // 模式：新增颗粒
-        },
         resize: true // 监听画布尺寸变化
-      },
-      modes: {
-        push: {
-          // 新增模式
-          particles_nb: 5 // 新增数量
-        }
       }
     }
   };
