@@ -86,6 +86,28 @@ html:not(.home) {
   }
 }
 
+.lx-toolbox {
+  .el-input-number {
+    width: 100%;
+    .el-input {
+      .el-input__wrapper {
+        padding-left: 10px;
+        .el-input__inner {
+          text-align: left;
+        }
+      }
+    }
+
+    &:not(.is-controls-right) {
+      .el-input {
+        .el-input__wrapper {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}
+
 // .app-layout {
 //   background: getCssVar('bg-color', 'page');
 

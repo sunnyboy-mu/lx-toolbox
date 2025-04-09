@@ -48,17 +48,17 @@ function generateBookmarkMenu(data = []) {
   };
 }
 
-function generateMenu(routes, systemInfo) {
+function generateMenu(routes, systemInfo, currentRoute) {
   const menu = [];
   routes.forEach((route) => {
     route.children?.forEach((child) => {
       const item = {
         title: child.meta.title,
-        path: `${route.path}/${child.path}`,
+        path: `${currentRoute ? currentRoute.path : route.path}/${child.path}`,
         icon: child.meta.icon
       };
       if (child.children) {
-        item.children = generateMenu([child], systemInfo).flat();
+        item.children = generateMenu([child], systemInfo, item).flat();
       }
       if (SPECIAL_MENUS.some((v) => child.path.startsWith(v))) {
         handleSpecialMenu(item, systemInfo);

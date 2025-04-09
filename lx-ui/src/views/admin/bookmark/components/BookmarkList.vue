@@ -7,14 +7,10 @@
     </div>
 
     <el-table class="flex-1" stripe :data="tableData" width="100%">
-      <el-table-column
-        type="index"
-        #default="{ $index }"
-        label="序号"
-        width="80"
-        align="center"
-      >
-        {{ (page - 1) * size + $index + 1 }}
+      <el-table-column type="index" label="序号" width="80" align="center">
+        <template #default="{ $index }">
+          {{ (page - 1) * size + $index + 1 }}
+        </template>
       </el-table-column>
       <el-table-column prop="title" label="网站标题" />
       <el-table-column prop="url" label="网址" />

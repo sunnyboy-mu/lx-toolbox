@@ -1,6 +1,7 @@
 import { BLOG_ICON } from '@/enum/common-config';
 import { isExternalLink } from './common';
 import { ElMessage } from 'element-plus/es';
+import { useIconfont } from '@/composables/use-iconfont';
 
 export async function injectionBlogIconfontCss(data) {
   if (
@@ -12,6 +13,9 @@ export async function injectionBlogIconfontCss(data) {
     ElMessage.error('博客图标配置错误！');
     return;
   }
+
+  useIconfont().parserIconfontSource(data.configValue);
+
   // 删除旧link
   document.querySelector(`#${BLOG_ICON}`)?.remove();
   // 添加新link

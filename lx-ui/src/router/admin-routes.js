@@ -22,6 +22,52 @@ export default [
           title: '书签管理',
           icon: 'icon-daohang'
         }
+      },
+      {
+        path: 'blog',
+        name: 'blogManage',
+        meta: {
+          title: '博客管理',
+          icon: 'icon-blogger'
+        },
+        children: [
+          {
+            path: 'category',
+            name: 'blogCategory',
+            component: () => import('@/views/admin/blog/category/index.vue'),
+            meta: {
+              title: '分类管理',
+              icon: 'icon-fenlei'
+            }
+          },
+          {
+            path: 'group',
+            name: 'blogGroup',
+            component: () => import('@/views/admin/blog/group/index.vue'),
+            meta: {
+              title: '分组管理',
+              icon: 'icon-fenzu'
+            }
+          },
+          {
+            path: 'info',
+            name: 'blogInfo',
+            component: () => import('@/views/admin/blog/info/index.vue'),
+            meta: {
+              title: '文章管理',
+              icon: 'icon-16'
+            }
+          },
+          {
+            path: 'recycle',
+            name: 'blogRecycle',
+            component: () => import('@/views/admin/blog/recycle/index.vue'),
+            meta: {
+              title: '回收站',
+              icon: 'icon-huishouzhan'
+            }
+          }
+        ]
       }
     ]
   }

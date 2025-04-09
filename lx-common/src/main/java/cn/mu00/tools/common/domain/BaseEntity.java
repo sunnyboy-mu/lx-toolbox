@@ -21,12 +21,12 @@ public class BaseEntity implements Serializable {
     @TableLogic
     private Integer isDeleted; // 0: 正常, 1: 已删除
 
-    @JsonFormat(pattern = "yyyy-MM-dd") // 使用 FastJSON 进行日期格式化
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 使用 FastJSON 进行日期格式化
     private Date createdAt; // 创建时间
 
     private String createdBy; // 创建人
 
-    @JsonFormat(pattern = "yyyy-MM-dd") // 使用 FastJSON 进行日期格式化
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 使用 FastJSON 进行日期格式化
     private Date updatedAt; // 更新时间
 
     private String updatedBy; // 更新人
