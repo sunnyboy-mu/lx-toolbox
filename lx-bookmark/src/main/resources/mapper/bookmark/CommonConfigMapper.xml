@@ -41,7 +41,7 @@
           <foreach item="status" collection="statusList" open="(" separator="," close=")">
             #{status}
           </foreach>
-    ORDER BY bmg.sort, bmi.created_at DESC
+    ORDER BY bmg.sort, bmi.created_at
   </select>
 
 </mapper>
