@@ -7,6 +7,7 @@ import cn.mu00.tools.bookmark.mapper.BmGroupMapprt;
 import cn.mu00.tools.bookmark.service.BmGroupService;
 import cn.mu00.tools.bookmark.service.BmInfoService;
 import cn.mu00.tools.common.exception.ServiceException;
+import cn.mu00.tools.common.utils.SortExchangeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,31 +53,7 @@ public class BmGroupServiceImpl extends ServiceImpl<BmGroupMapprt, BmGroup> impl
     @Transactional
     @Override
     public String sort(List<String> bmGroupIds) {
-        Map<String, BmGroup> bmGroupMap = this.listByIds(bmGroupIds).stream()
-                .collect(Collectors.toMap(BmGroup::getId, Function.identity()));
-
-        // 按bmGroupIds顺序收集对应的排序值，确保顺序一致
-        List<Integer> bmGroupSorts = new ArrayList<>(bmGroupIds.size());
-        for (String id : bmGroupIds) {
-            BmGroup group = bmGroupMap.get(id);
-            if (group == null) {
-                throw new IllegalArgumentException("无效的分组ID: " + id);
-            }
-            bmGroupSorts.add(group.getSort());
-        }
-
-        // 升序排序
-        bmGroupSorts.sort(Integer::compareTo);
-
-        // 构建更新列表，通过索引匹配ID与排序值
-        List<BmGroup> bmGroups = IntStream.range(0, bmGroupIds.size())
-                .mapToObj(i -> {
-                    BmGroup bmGroup = new BmGroup();
-                    bmGroup.setId(bmGroupIds.get(i));
-                    bmGroup.setSort(bmGroupSorts.get(i));
-                    return bmGroup;
-                })
-                .collect(Collectors.toList());
+        List<BmGroup> bmGroups = SortExchangeUtil.exchangeSort(bmGroupIds, this.listByIds(bmGroupIds), BmGroup::new);
         // 批量更新
         this.updateBatchById(bmGroups);
         return "排序成功！";

@@ -2,7 +2,9 @@ package cn.mu00.tools.controller.common;
 
 import cn.mu00.tools.bookmark.domain.BmCategory;
 import cn.mu00.tools.bookmark.service.BmCategoryService;
+import cn.mu00.tools.common.constant.ConfigKey;
 import cn.mu00.tools.common.domain.R;
+import cn.mu00.tools.common.service.CommonConfigService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,10 @@ public class commonController {
     @Autowired
     private BmCategoryService bmCategoryService;
 
+    @Autowired
+    private CommonConfigService commonConfigService;
+
+
     @GetMapping("/system-info.interface")
     public R<?> systemInfo() {
         // 构建HashMap
@@ -26,7 +32,8 @@ public class commonController {
         // 1、书签分类
         List<BmCategory> bmCategoryList = bmCategoryService.list(new LambdaQueryWrapper<BmCategory>().orderByAsc(BmCategory::getSort));
         map.put("bookmark", bmCategoryList);
-
+        // 2. 博客图标
+        map.put(ConfigKey.BLOG_ICON, commonConfigService.getCommonConfigByKey(ConfigKey.BLOG_ICON));
         return R.ok(map);
     }
 }

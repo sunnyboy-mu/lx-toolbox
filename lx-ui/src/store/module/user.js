@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
+import { BLOG_ICON } from '@/enum/common-config';
 import {
   login,
   loginByAuthCode,
@@ -10,6 +11,7 @@ import {
 import { setToken, removeToken } from '@/utils/token-util';
 import { ElMessage } from 'element-plus/es';
 import { generateAdminMenu, generateFrontEndMenu } from '@/utils/menu-utils';
+import { injectionBlogIconfontCss } from '@/utils/page-util';
 
 export const useUserStore = defineStore('user', () => {
   const isLoggedIn = ref(false);
@@ -66,6 +68,10 @@ export const useUserStore = defineStore('user', () => {
 
   const loadSystemInfo = async () => {
     const data = await systemInfo();
+    nextTick(() => {
+      // 注入iconfont
+      injectionBlogIconfontCss(data[BLOG_ICON]);
+    });
 
     // 前台菜单
     frontMenu.value = generateFrontEndMenu(data);

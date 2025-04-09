@@ -45,6 +45,12 @@
       <artifactId>lx-bookmark</artifactId>
     </dependency>
 
+    <!-- blog模块-->
+    <dependency>
+      <groupId>cn.mu00</groupId>
+      <artifactId>lx-blog</artifactId>
+    </dependency>
+
 
   </dependencies>
 

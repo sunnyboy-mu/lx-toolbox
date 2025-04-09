@@ -148,11 +148,7 @@
       userStore
         .doUserlogin(form, loginType.value)
         .then(() => {
-          if (route.path === '/login') {
-            router.push('/');
-          } else {
-            window.location.reload();
-          }
+          window.location.reload();
         })
         .finally(() => {
           loading.value = false;

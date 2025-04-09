@@ -7,7 +7,6 @@ import cn.mu00.tools.bookmark.domain.BmInfo;
 import cn.mu00.tools.bookmark.domain.vo.BmInfoVo;
 import cn.mu00.tools.bookmark.domain.vo.BookmarkVo;
 import cn.mu00.tools.bookmark.mapper.BmInfoMapper;
-import cn.mu00.tools.bookmark.service.BmCategoryService;
 import cn.mu00.tools.bookmark.service.BmGroupService;
 import cn.mu00.tools.bookmark.service.BmInfoService;
 import cn.mu00.tools.common.constant.UserRole;

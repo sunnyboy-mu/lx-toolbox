@@ -1,7 +1,7 @@
 package cn.mu00.tools.system.service;
 
+import cn.mu00.tools.common.domain.vo.TokenVo;
 import cn.mu00.tools.system.domain.vo.LoginVo;
-import cn.mu00.tools.system.domain.vo.TokenVo;
 
 public interface LoginService {
 

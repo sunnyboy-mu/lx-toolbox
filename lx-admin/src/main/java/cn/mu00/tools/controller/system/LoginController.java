@@ -1,8 +1,8 @@
 package cn.mu00.tools.controller.system;
 
 import cn.mu00.tools.common.domain.R;
+import cn.mu00.tools.common.domain.vo.TokenVo;
 import cn.mu00.tools.system.domain.vo.LoginVo;
-import cn.mu00.tools.system.domain.vo.TokenVo;
 import cn.mu00.tools.system.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

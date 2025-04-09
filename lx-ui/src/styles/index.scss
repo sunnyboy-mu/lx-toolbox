@@ -44,7 +44,9 @@ html:not(.home) {
 .iconfont {
   font-size: inherit;
 }
-
+.el-menu.el-menu--popup {
+  min-width: 160px;
+}
 .lx-admin-menus.el-menu--horizontal {
   --el-menu-horizontal-height: 32px;
   --el-menu-item-height: 32px;

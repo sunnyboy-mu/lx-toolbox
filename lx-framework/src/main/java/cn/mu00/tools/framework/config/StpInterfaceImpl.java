@@ -3,8 +3,8 @@ package cn.mu00.tools.framework.config;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.mu00.tools.common.domain.vo.TokenVo;
 import cn.mu00.tools.common.redis.RedisCache;
-import cn.mu00.tools.system.domain.vo.TokenVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
