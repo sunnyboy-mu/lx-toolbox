@@ -3,6 +3,7 @@ package cn.mu00.tools.blog.service.impl;
 import cn.mu00.tools.blog.domain.BlogCategory;
 import cn.mu00.tools.blog.domain.BlogGroup;
 import cn.mu00.tools.blog.domain.BlogInfo;
+import cn.mu00.tools.blog.domain.vo.BlogTypeTreeVo;
 import cn.mu00.tools.blog.mapper.BlogCategoryMapper;
 import cn.mu00.tools.blog.service.BlogCategoryService;
 import cn.mu00.tools.blog.service.BlogGroupService;
@@ -15,10 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 @Service
 public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, BlogCategory> implements BlogCategoryService {
+
+
+    @Resource
+    private BlogCategoryMapper blogCategoryMapper;
 
     @Autowired
     private BlogGroupService blogGroupService;
@@ -56,5 +62,10 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
         }
         removeById(id);
         return "删除成功";
+    }
+
+    @Override
+    public List<BlogTypeTreeVo> getBlogTypeTree() {
+        return blogCategoryMapper.getBlogTypeTree();
     }
 }

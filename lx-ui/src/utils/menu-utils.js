@@ -52,6 +52,9 @@ function generateMenu(routes, systemInfo, currentRoute) {
   const menu = [];
   routes.forEach((route) => {
     route.children?.forEach((child) => {
+      if (child.meta?.hidden) {
+        return;
+      }
       const item = {
         title: child.meta.title,
         path: `${currentRoute ? currentRoute.path : route.path}/${child.path}`,

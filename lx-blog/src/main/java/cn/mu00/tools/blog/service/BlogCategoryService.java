@@ -1,6 +1,7 @@
 package cn.mu00.tools.blog.service;
 
 import cn.mu00.tools.blog.domain.BlogCategory;
+import cn.mu00.tools.blog.domain.vo.BlogTypeTreeVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface BlogCategoryService extends IService<BlogCategory> {
     String updateSort(List<String> ids);
 
     String removeByCategoryId(String id);
+
+    List<BlogTypeTreeVo> getBlogTypeTree();
 }

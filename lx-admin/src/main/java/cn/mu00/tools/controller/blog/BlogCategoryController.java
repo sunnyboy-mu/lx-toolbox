@@ -1,6 +1,7 @@
 package cn.mu00.tools.controller.blog;
 
 import cn.mu00.tools.blog.domain.BlogCategory;
+import cn.mu00.tools.blog.domain.vo.BlogTypeTreeVo;
 import cn.mu00.tools.blog.service.BlogCategoryService;
 import cn.mu00.tools.common.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,8 @@ public class BlogCategoryController {
         return R.ok(blogCategoryService.getNextCountValue());
     }
 
+    @GetMapping("/typeTree")
+    public R<List<BlogTypeTreeVo>> getBlogTypeTree(){
+        return R.ok(blogCategoryService.getBlogTypeTree());
+    }
 }

@@ -6,6 +6,7 @@ import router from './router';
 import '@/styles/element-plus-theme/index.scss';
 import '@/styles/dark.scss';
 import '@/styles/index.scss';
+import 'bytemd/dist/index.css';
 import 'animate.css';
 import Particles from '@tsparticles/vue3';
 import { loadSlim } from '@tsparticles/slim';

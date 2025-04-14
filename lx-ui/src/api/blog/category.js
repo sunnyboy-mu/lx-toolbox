@@ -31,3 +31,10 @@ export const updateBlogCategory = async (data) => {
 export const deleteBlogCategory = async (id) => {
   return await request.delete(`/blog/category/${id}`);
 };
+
+/**
+ * 博客类型树
+ */
+export const treeBlogType = async () => {
+  return await request.get(`/blog/category/typeTree`);
+};

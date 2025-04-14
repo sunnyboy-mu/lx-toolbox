@@ -21,6 +21,7 @@
     "@vueuse/core": "^13.0.0",
     "animate.css": "^4.1.1",
     "axios": "^1.8.3",
+    "bytemd": "^1.22.0",
     "element-plus": "^2.9.6",
     "lodash-es": "^4.17.21",
     "pinia": "^3.0.1",

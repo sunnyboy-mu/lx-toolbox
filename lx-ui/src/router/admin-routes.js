@@ -66,6 +66,17 @@ export default [
               title: '回收站',
               icon: 'icon-huishouzhan'
             }
+          },
+          {
+            path: 'edit/:blogId?',
+            name: 'blogAddOrEdit',
+            component: () => import('@/views/admin/blog/edit/index.vue'),
+            meta: {
+              title: '编辑文章',
+              icon: 'icon-16',
+              hidden: true,
+              active: '/admin/blog/info'
+            }
           }
         ]
       }
