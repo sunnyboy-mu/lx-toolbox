@@ -11,7 +11,10 @@
         <el-input v-model="form.title" placeholder="请输入文章标题" />
       </el-form-item>
       <div class="flex-1 overflow-hidden">
-        <BytemdEditor />
+        <ByteMdEditor
+          v-model="form.sourceText"
+          @change="handleSourceTextChange"
+        />
       </div>
     </div>
     <div class="shrink-0 w-96 pl-2 border-l border-gray-200">
@@ -95,7 +98,7 @@
   import { ref, reactive, onMounted } from 'vue';
   import IconSelect from '@/components/IconSelect/index.vue';
   import { EditPen, Position, QuestionFilled } from '@element-plus/icons-vue';
-  import BytemdEditor from '@/components/BytemdEditor/index.vue';
+  import ByteMdEditor from '@/components/ByteMdEditor/index.vue';
 
   const [form, resetFields, assignFields, setFieldValue] = useFormData({
     id: void 0,
@@ -129,7 +132,26 @@
     typeTreeData.value = data;
   });
 
-  const handleChange = (value) => {
-    setFieldValue('sourceText', value);
+  const handleSourceTextChange = (value) => {
+    console.log(value);
   };
+
+  setFieldValue(
+    'sourceText',
+    `## 标题1
+
+### 标题1.1
+
+### 标题1.2
+
+#### 标题1.2.1
+
+## 标题2
+
+### 标题2.1
+
+#### 标题2.1.1
+
+### 标题2.2`
+  );
 </script>
