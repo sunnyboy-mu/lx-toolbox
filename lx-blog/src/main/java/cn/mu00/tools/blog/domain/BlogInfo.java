@@ -40,13 +40,11 @@ public class BlogInfo extends BaseEntity {
 
     private String categoryId;
 
-    @TableField(exist = false)
-    private Boolean publish;
 
     /**
      * status
-     * 0 未发布
-     * 1 已发布
+     * 0 正常
+     * 1 隐藏
      * 2 回收站
      */
 

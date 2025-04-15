@@ -5,6 +5,8 @@
     :rules="rules"
     ref="formRef"
     class="lx-page flex"
+    v-loading="loading"
+    element-loading-text="加载中..."
   >
     <div class="flex-1 pr-2 flex flex-col">
       <el-form-item prop="title">
@@ -13,25 +15,22 @@
       <div class="flex-1 overflow-hidden">
         <ByteMdEditor
           v-model="form.sourceText"
-          @change="handleSourceTextChange"
+          placeholder="请输入文章内容"
+          ref="byteMdEditorRef"
         />
       </div>
     </div>
     <div class="shrink-0 w-96 pl-2 border-l border-gray-200">
       <div class="pb-2 flex justify-end">
-        <el-tooltip
-          effect="light"
-          content="保持文章至草稿箱"
-          placement="bottom-end"
-        >
-          <el-button :icon="EditPen">保存</el-button>
-        </el-tooltip>
+        <el-button :icon="ArrowLeft" @click="router.back()">返回</el-button>
         <el-tooltip
           effect="light"
           content="立即发布文章"
           placement="bottom-end"
         >
-          <el-button type="primary" :icon="Position">发布</el-button>
+          <el-button type="primary" :icon="Position" @click="submit"
+            >保存</el-button
+          >
         </el-tooltip>
       </div>
       <el-form-item label="所属分组" prop="groupId">
@@ -42,6 +41,8 @@
           node-key="id"
           accordion
           placeholder="请选择分组"
+          auto-expand-parent
+          :default-expanded-keys="defaultExpandedKeys"
         >
           <template #default="{ node, data }">
             <div class="flex items-center el-tree-node__label">
@@ -69,6 +70,12 @@
           :controls="false"
         />
       </el-form-item>
+      <el-form-item label="状态" prop="status">
+        <el-radio-group v-model="form.status">
+          <el-radio :value="0" border>正常</el-radio>
+          <el-radio :value="1" border>隐藏</el-radio>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="高级（仅登录可见）" prop="special">
         <template #label>
           <div class="flex items-center">
@@ -95,10 +102,33 @@
 <script setup>
   import { treeBlogType } from '@/api/blog/category';
   import { useFormData } from '@/utils/use-form-data';
-  import { ref, reactive, onMounted } from 'vue';
+  import { ref, reactive, computed } from 'vue';
   import IconSelect from '@/components/IconSelect/index.vue';
-  import { EditPen, Position, QuestionFilled } from '@element-plus/icons-vue';
+  import {
+    EditPen,
+    Position,
+    QuestionFilled,
+    ArrowLeft
+  } from '@element-plus/icons-vue';
   import ByteMdEditor from '@/components/ByteMdEditor/index.vue';
+  import { useRoute } from 'vue-router';
+  import {
+    addBlogInfo,
+    detailBlogInfo,
+    nextBlogInfoSortValue,
+    updateBlogInfo
+  } from '@/api/blog/info';
+  import { ElMessage } from 'element-plus/es';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const route = useRoute();
+
+  const loading = ref(true);
+
+  const defaultExpandedKeys = computed(() => {
+    return form.groupId ? [form.groupId] : [];
+  });
 
   const [form, resetFields, assignFields, setFieldValue] = useFormData({
     id: void 0,
@@ -120,6 +150,10 @@
 
   const formRef = ref(null);
 
+  const isUpdata = ref(false);
+
+  const byteMdEditorRef = ref(null);
+
   const rules = reactive({
     title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
     groupId: [{ required: true, message: '请选择分组', trigger: 'change' }],
@@ -132,26 +166,44 @@
     typeTreeData.value = data;
   });
 
-  const handleSourceTextChange = (value) => {
-    console.log(value);
+  const submit = () => {
+    formRef.value.validate((valid) => {
+      if (!valid) return;
+      loading.value = true;
+      setFieldValue('renderText', byteMdEditorRef.value?.getHtml());
+      setFieldValue(
+        'catalog',
+        JSON.stringify(byteMdEditorRef.value?.getCatalog())
+      );
+      const api = isUpdata.value ? updateBlogInfo : addBlogInfo;
+
+      api({
+        ...form,
+        tags: JSON.stringify(form.tags)
+      }).then((msg) => {
+        loading.value = false;
+        ElMessage.success(msg);
+        router.back();
+      });
+    });
   };
 
-  setFieldValue(
-    'sourceText',
-    `## 标题1
+  const init = async () => {
+    const { blogId } = route.params;
+    const { groupId } = route.query;
+    if (blogId) {
+      const data = await detailBlogInfo(blogId);
+      assignFields(data);
+      setFieldValue('tags', JSON.parse(data.tags));
+      setFieldValue('catalog', JSON.parse(data.catalog));
+      isUpdata.value = true;
+    } else {
+      isUpdata.value = false;
+      setFieldValue('sort', await nextBlogInfoSortValue());
+      setFieldValue('groupId', groupId);
+    }
+    loading.value = false;
+  };
 
-### 标题1.1
-
-### 标题1.2
-
-#### 标题1.2.1
-
-## 标题2
-
-### 标题2.1
-
-#### 标题2.1.1
-
-### 标题2.2`
-  );
+  init();
 </script>

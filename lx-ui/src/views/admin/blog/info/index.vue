@@ -31,13 +31,16 @@
         </el-tree>
       </el-scrollbar>
     </div>
-    <div class="flex-1"></div>
+    <div class="flex-1">
+      <InfoList v-if="activeGroupId" class="h-full" :group-id="activeGroupId" />
+    </div>
   </div>
 </template>
 
 <script setup>
   import { treeBlogType } from '@/api/blog/category';
   import { ref, nextTick } from 'vue';
+  import InfoList from './components/InfoList.vue';
 
   const loading = ref(true);
 

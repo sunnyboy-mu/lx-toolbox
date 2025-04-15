@@ -1,7 +1,6 @@
 package cn.mu00.tools.blog.service;
 
 import cn.mu00.tools.blog.domain.BlogInfo;
-import cn.mu00.tools.blog.domain.vo.BlogTypeTreeVo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,25 +18,14 @@ public interface BlogInfoService extends IService<BlogInfo> {
 
     String deleteBlogInfoById(String id);
 
-    String batchDeleteByIds(List<String> ids);
-
     String updateSort(List<String> ids);
-
-    String deleteRecycleBlogInfoById(String id);
 
     String batchDeleteRecycleByIds(List<String> ids);
 
-    String recoveryFromRecycleById(String id);
 
     String batchRecoveryFromRecycleByIds(List<String> ids);
 
-    String publishBlogInfo(String id);
+    Page<BlogInfo> recyclePage(Page<BlogInfo> page);
 
-    String batchPublishByIds(List<String> ids);
-
-    String unPublishBlogInfo(String id);
-
-    String batchUnPublishByIds(List<String> ids);
-    
 
 }

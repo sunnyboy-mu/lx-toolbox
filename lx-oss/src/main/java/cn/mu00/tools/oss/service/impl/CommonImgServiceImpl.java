@@ -59,6 +59,26 @@ public class CommonImgServiceImpl implements CommonImgService {
         }
     }
 
+
+    @Override
+    public ImageVo updateBlogImg(MultipartFile file) {
+        try {
+            // 文件拓展名
+            String suffix = Objects.requireNonNull(file.getOriginalFilename()).substring(file.getOriginalFilename().lastIndexOf("."));
+            // 文件名
+            String fileName = FileUtil.timestampFileName() + suffix;
+            // 文件路径
+            String filePath ="/blog" + fileName;
+            // 系统OSS配置
+            OssConfig ossConfig = ossConfigService.getOssConfigDetail();
+            // 上传文件
+            upYunUtil.upload(filePath,file.getBytes());
+            return new ImageVo(fileName, ossConfig.getCdnDomain() + filePath, filePath, file.getSize());
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage(), 500);
+        }
+    }
+
     private void checkFileForCommonUser(MultipartFile file){
         // 文件大小小于10m
         if (file.getSize() > 10 * 1024 * 1024){

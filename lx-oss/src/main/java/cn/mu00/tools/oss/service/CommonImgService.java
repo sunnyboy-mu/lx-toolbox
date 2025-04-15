@@ -8,4 +8,6 @@ public interface CommonImgService {
     ImageVo upload(OssConfig ossConfig, MultipartFile file);
 
     String delete(String filePath);
+
+    ImageVo updateBlogImg(MultipartFile file);
 }

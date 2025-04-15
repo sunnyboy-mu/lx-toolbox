@@ -9,6 +9,7 @@
   import 'bytemd/dist/index.min.css';
   import plugins from './plugins';
   import './bytemd-theme-styles/github-markdown.css';
+  import { uploadBlogInfoImage } from '@/api/blog/info';
 
   defineOptions({ name: 'ByteMdEditor' });
 
@@ -42,10 +43,15 @@
   let editor = null;
 
   const handleImageUpload = async (files) => {
-    return files.map((file) => {
+    const res = await Promise.all(
+      files.map((file) => {
+        return uploadBlogInfoImage(file);
+      })
+    );
+    return res.map((file) => {
       return {
         title: file.name,
-        url: 'https://upyun-oss.mu00.cn/20250207071737310.png'
+        url: file.url
       };
     });
   };
@@ -109,7 +115,6 @@
   });
 
   defineExpose({
-    editor,
     getCatalog,
     getHtml
   });
