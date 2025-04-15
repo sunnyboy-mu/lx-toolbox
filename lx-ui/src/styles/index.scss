@@ -17,7 +17,6 @@
 
 * {
   outline: none;
-  scroll-behavior: smooth;
 }
 
 .font-zwzt {
@@ -32,9 +31,11 @@ html,
 body {
   margin: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
 }
 
-html:not(.home) {
+html:not(.home),
+body:not(.home) {
   scroll-padding-top: 72px;
 }
 

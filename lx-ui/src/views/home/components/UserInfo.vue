@@ -16,11 +16,11 @@
         <img
           src="https://upyun-oss.mu00.cn/2025/03/28//1743153285926.jpg"
           alt="沐沐物语"
-          class="w-32 h-32 rounded-full border-6 border-white duration-300 hover:scale-110 hover:rotate-360 mb-8"
+          class="w-32 h-32 rounded-full border-6 border-white duration-300 hover:scale-130 mb-8"
         />
 
         <!-- 标题 -->
-        <h2 class="text-4xl font-bold mb-4"> 沐沐物语 </h2>
+        <h2 class="text-4xl font-bold mb-8"> Moe-Cryo </h2>
 
         <!-- 描述 -->
 
@@ -29,7 +29,7 @@
         </p>
 
         <!-- 一言 -->
-        <div class="text-center mt-24 min-h-16">
+        <div class="text-center mt-20 min-h-16">
           <div
             v-if="!!hitokotoData.hitokoto"
             class="animate__animated animate__fadeInUp"

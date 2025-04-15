@@ -1,6 +1,7 @@
 import { visit } from 'unist-util-visit';
 import { clipboardCheckIcon, foldBtn, newSvgIcon, successTip } from './icons';
 import './styles/index.css';
+import { copyToClipboard } from './utils';
 
 export default function codeCopyPlugin() {
   return {
