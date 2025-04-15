@@ -2,6 +2,7 @@ import { API_BASE_URL, TOKEN_CACHE_NAME } from '@/config/setting';
 import axios from 'axios';
 import { getToken } from './token-util';
 import { ElMessage } from 'element-plus/es';
+import router from '@/router';
 
 const request = axios.create({
   baseURL: API_BASE_URL,
@@ -30,7 +31,11 @@ request.interceptors.response.use(
     ElMessage.error(msg);
     if (code === 401) {
       // 未登录
-      Promise.reject(msg);
+      return Promise.reject(msg);
+    } else if (code === 403) {
+      router.push({ name: '403' });
+    } else if (code === 404) {
+      router.push({ name: '404' });
     }
     return Promise.reject(msg);
   },

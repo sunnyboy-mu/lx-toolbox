@@ -50,3 +50,10 @@ export const deleteBlogInfo = (id) => {
 export const uploadBlogInfoImage = async (file) => {
   return await request.postForm('/blog/info/upload-img', { file });
 };
+
+/**
+ * 文章详细
+ */
+export const detailArticle = async (id) => {
+  return await request.get(`/blog/info/detail-info/${id}.interface`);
+};

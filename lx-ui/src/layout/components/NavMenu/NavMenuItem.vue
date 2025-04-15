@@ -2,7 +2,12 @@
   <el-sub-menu :index="menu.path" v-if="menu.children" :key="menu.path">
     <template #title>
       <div class="flex items-center gap-1">
-        <i class="iconfont" :class="menu.icon"></i>
+        <i
+          :class="[
+            menu?.icon?.startsWith('lx-') ? 'lx-iconfont' : 'iconfont',
+            menu.icon
+          ]"
+        ></i>
         <span>{{ menu.title }}</span>
       </div>
     </template>
@@ -12,7 +17,12 @@
       :key="child.path"
     >
       <div class="flex items-center gap-1">
-        <i class="iconfont" :class="child.icon"></i>
+        <i
+          :class="[
+            menu?.icon?.startsWith('lx-') ? 'lx-iconfont' : 'iconfont',
+            menu.icon
+          ]"
+        ></i>
         <span>{{ child.title }}</span>
       </div>
     </el-menu-item>

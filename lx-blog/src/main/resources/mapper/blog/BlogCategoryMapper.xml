@@ -12,6 +12,7 @@
       <id     property="id"      column="group_id"      />
       <result property="title"    column="group_title"    />
       <result property="icon"    column="group_icon"    />
+      <result property="url" column="group_url" />
     </collection>
   </resultMap>
 
@@ -30,6 +31,35 @@
         AND bg.is_deleted = 0
     WHERE
       bc.`status` IN ( 0, 2 )
+      AND bc.is_deleted = 0
+    ORDER BY
+      bc.sort,
+      bg.sort
+  </select>
+
+  <select id="getBlogTypeTreeAndHasMainUrl" resultMap="BlogTypeResult">
+    SELECT
+      bc.id,
+      bc.title,
+      bc.icon,
+      bg.id AS group_id,
+      bg.title AS group_title,
+      bg.icon AS group_icon,
+      bg.url AS group_url
+    FROM
+      blog_category AS bc
+        RIGHT JOIN blog_group AS bg ON bg.category_id = bc.id
+        AND bg.`status` IN
+        <foreach item="status" collection="statusList" open="(" separator="," close=")">
+          #{status}
+        </foreach>
+        AND bg.is_deleted = 0
+        AND bg.url != ''
+    WHERE
+      bc.`status` IN
+      <foreach item="status" collection="statusList" open="(" separator="," close=")">
+        #{status}
+      </foreach>
       AND bc.is_deleted = 0
     ORDER BY
       bc.sort,

@@ -465,6 +465,13 @@
   list-style-type: lower-roman;
 }
 
+.markdown-body ol li {
+  list-style-type: decimal;
+}
+.markdown-body ul li {
+  list-style-type: disc;
+}
+
 .markdown-body ul ul ol,
 .markdown-body ul ol ol,
 .markdown-body ol ul ol,

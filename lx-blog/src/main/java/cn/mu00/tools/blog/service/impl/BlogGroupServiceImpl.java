@@ -58,4 +58,15 @@ public class BlogGroupServiceImpl extends ServiceImpl<BlogGroupMapper, BlogGroup
         this.updateBatchById(blogGroups);
         return "排序成功";
     }
+
+
+    @Override
+    public void setGroupUrl(String id, String url) {
+        BlogGroup blogGroup = getById(id);
+        if (ObjectUtil.isNull(blogGroup)) {
+            throw new ServiceException("分组不存在");
+        }
+        blogGroup.setUrl(url);
+        updateById(blogGroup);
+    }
 }

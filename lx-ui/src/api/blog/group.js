@@ -31,3 +31,10 @@ export const updateBlogGroup = async (data) => {
 export const deleteBlogGroup = async (id) => {
   return await request.delete(`/blog/group/${id}`);
 };
+
+/**
+ * 分组下文章
+ */
+export const listBlogInfoByGroupId = async (groupId) => {
+  return await request.get('/blog/group/info?groupId=' + groupId);
+};

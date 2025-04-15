@@ -1,11 +1,14 @@
 package cn.mu00.tools.controller.blog;
 
 import cn.mu00.tools.blog.domain.BlogGroup;
+import cn.mu00.tools.blog.domain.BlogInfo;
 import cn.mu00.tools.blog.service.BlogGroupService;
+import cn.mu00.tools.blog.service.BlogInfoService;
 import cn.mu00.tools.common.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,9 @@ public class BlogGroupController {
 
     @Autowired
     private BlogGroupService blogGroupService;
+
+    @Resource
+    private BlogInfoService blogInfoService;
 
     @GetMapping
     public R<List<BlogGroup>> list(BlogGroup blogGroup) {
@@ -45,5 +51,10 @@ public class BlogGroupController {
     @PutMapping("/sort")
     public R<String> updateSort(@RequestBody List<String> ids) {
         return R.ok(blogGroupService.updateSort(ids));
+    }
+
+    @GetMapping("/info")
+    public R<List<BlogInfo>> listBlogByGroupId(String groupId) {
+        return R.ok(blogInfoService.getBlogInfoListByGroupId(groupId));
     }
 }

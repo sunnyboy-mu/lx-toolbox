@@ -18,6 +18,9 @@ export function generateFrontEndMenu(systemInfo) {
     path: '/',
     icon: 'icon-home'
   });
+  // 处理博客菜单
+  menu.push(...handleBlogMenu(systemInfo));
+
   return menu;
 }
 
@@ -28,24 +31,6 @@ export function generateFrontEndMenu(systemInfo) {
  */
 export function generateAdminMenu(systemInfo) {
   return generateMenu(adminRoutes, systemInfo);
-}
-
-/**
- * 生成书签菜单
- * @param {Array} data
- * @returns
- */
-function generateBookmarkMenu(data = []) {
-  return {
-    title: '书签',
-    path: '/fe/bookmark',
-    icon: 'icon-daohang',
-    children: data.map((v, i) => ({
-      title: v.name,
-      path: `/fe/bookmark/${v.id}`,
-      icon: v.icon ?? ['icon-kaifa', 'icon-zonghekongzhitai'][i % 2]
-    }))
-  };
 }
 
 function generateMenu(routes, systemInfo, currentRoute) {
@@ -88,4 +73,24 @@ function handleSpecialMenu(route, systemInfo) {
     path: `${route.path}/${v.id}`,
     icon: v.icon
   }));
+}
+
+function handleBlogMenu(systemInfo) {
+  const blogType = systemInfo?.blogType ?? [];
+
+  return blogType.map((v) => {
+    const item = {
+      title: v.title,
+      icon: v.icon,
+      path: `/fe/blog-type/${v.alias ?? v.id}`
+    };
+    if (v.children) {
+      item.children = v.children.map((child) => ({
+        title: child.title,
+        icon: child.icon,
+        path: `/fe/blog/${child.alias ?? child.url}`
+      }));
+    }
+    return item;
+  });
 }

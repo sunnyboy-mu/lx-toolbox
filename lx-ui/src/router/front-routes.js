@@ -22,6 +22,14 @@ export default [
           title: '书签',
           icon: 'icon-daohang'
         }
+      },
+      {
+        path: 'blog/:id',
+        name: 'blogDetail',
+        component: () => import('@/views/frontend/blog/index.vue'),
+        meta: {
+          hidden: true
+        }
       }
     ]
   }

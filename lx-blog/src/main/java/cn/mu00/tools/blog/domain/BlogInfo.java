@@ -40,6 +40,9 @@ public class BlogInfo extends BaseEntity {
 
     private String categoryId;
 
+    @TableField(exist = false)
+    private Integer groupMainInfo;
+
 
     /**
      * status

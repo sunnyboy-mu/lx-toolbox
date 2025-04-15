@@ -31,12 +31,24 @@
       <el-form-item label="分类图标" prop="icon">
         <IconSelect v-model="form.icon" placeholder="请输入分类图标" />
       </el-form-item>
-      <el-form-item label="跳转文章" prop="url">
-        <el-input
-          v-model="form.url"
-          placeholder="请输入跳转文章URL"
-          clearable
-        />
+      <el-form-item label="跳转文章" prop="url" v-if="form.id">
+        <el-select v-model="form.url" placeholder="请选择文章" clearable>
+          <el-option
+            v-for="info in infoList"
+            :key="info.id"
+            :value="info.id"
+            :label="info.title"
+          >
+            <div class="flex items-center">
+              <i
+                class="lx-iconfont mr-1"
+                v-if="info.icon"
+                :class="info.icon"
+              ></i>
+              <span class="text-xs">{{ info.title }}</span>
+            </div>
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="排序值" prop="sort">
         <el-input-number
@@ -79,6 +91,7 @@
   import IconSelect from '@/components/IconSelect/index.vue';
   import {
     addBlogGroup,
+    listBlogInfoByGroupId,
     nextBlogGroupSortValue,
     updateBlogGroup
   } from '@/api/blog/group';
@@ -103,7 +116,7 @@
 
   const rules = reactive({
     title: [{ required: true, message: '请输入网址标题', trigger: 'blur' }],
-    url: [{ required: true, message: '请输入跳转文章', trigger: 'blur' }],
+    // url: [{ required: true, message: '请输入跳转文章', trigger: 'blur' }],
     sort: [{ required: true, message: '请输入排序值', trigger: 'blur' }]
   });
 
@@ -136,11 +149,18 @@
     });
   };
 
+  const infoList = ref([]);
+  const getInfoList = async () => {
+    infoList.value = await listBlogInfoByGroupId(form.id);
+    console.log(infoList.value);
+  };
+
   watch(visible, (val) => {
     if (val) {
       if (props.data?.id) {
         assignFields(props.data);
         isUpdate.value = true;
+        getInfoList();
       } else {
         getSortValue();
         setFieldValue('categoryId', props.categoryId);

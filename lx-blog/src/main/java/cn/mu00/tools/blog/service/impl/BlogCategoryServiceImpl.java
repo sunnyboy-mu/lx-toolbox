@@ -1,5 +1,6 @@
 package cn.mu00.tools.blog.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.mu00.tools.blog.domain.BlogCategory;
 import cn.mu00.tools.blog.domain.BlogGroup;
 import cn.mu00.tools.blog.domain.BlogInfo;
@@ -8,6 +9,7 @@ import cn.mu00.tools.blog.mapper.BlogCategoryMapper;
 import cn.mu00.tools.blog.service.BlogCategoryService;
 import cn.mu00.tools.blog.service.BlogGroupService;
 import cn.mu00.tools.blog.service.BlogInfoService;
+import cn.mu00.tools.common.constant.UserRole;
 import cn.mu00.tools.common.exception.ServiceException;
 import cn.mu00.tools.common.utils.SortExchangeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -67,5 +69,15 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     @Override
     public List<BlogTypeTreeVo> getBlogTypeTree() {
         return blogCategoryMapper.getBlogTypeTree();
+    }
+
+    @Override
+    public List<BlogTypeTreeVo> getBlogTypeTreeAndHasMainUrl() {
+        List<Integer> statusList = new ArrayList<>();
+        statusList.add(0);
+        if (StpUtil.isLogin() && StpUtil.hasRole(UserRole.ADMIN)) {
+            statusList.add(2);
+        }
+        return blogCategoryMapper.getBlogTypeTreeAndHasMainUrl(statusList);
     }
 }

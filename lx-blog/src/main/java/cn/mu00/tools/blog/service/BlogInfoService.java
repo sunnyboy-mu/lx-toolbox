@@ -1,6 +1,7 @@
 package cn.mu00.tools.blog.service;
 
 import cn.mu00.tools.blog.domain.BlogInfo;
+import cn.mu00.tools.blog.domain.vo.BlogDetail;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -28,4 +29,7 @@ public interface BlogInfoService extends IService<BlogInfo> {
     Page<BlogInfo> recyclePage(Page<BlogInfo> page);
 
 
+    List<BlogInfo> getBlogInfoListByGroupId(String groupId);
+
+    BlogDetail getBlogDetail(String id);
 }

@@ -14,4 +14,6 @@ public interface BlogGroupService extends IService<BlogGroup> {
     String removeByGroupId(String id);
 
     String updateSort(List<String> ids);
+
+    void setGroupUrl(String id, String url);
 }

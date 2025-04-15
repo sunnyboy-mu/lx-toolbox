@@ -14,11 +14,16 @@
   import { isExternalLink } from '@/utils/common';
   import { useRoute, useRouter } from 'vue-router';
   import NavMenuItem from './NavMenuItem.vue';
+  import { useBlogStore } from '@/store/module/blog';
   const route = useRoute();
   const router = useRouter();
+  const blogStore = useBlogStore();
 
   const defaultActive = computed(() => {
     const { meta, path } = route;
+    if (path.startsWith('/fe/blog')) {
+      return blogStore.activeMenuUrl ?? path;
+    }
     return meta.active ?? path;
   });
 

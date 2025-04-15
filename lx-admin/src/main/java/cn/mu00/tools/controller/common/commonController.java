@@ -1,5 +1,6 @@
 package cn.mu00.tools.controller.common;
 
+import cn.mu00.tools.blog.service.BlogCategoryService;
 import cn.mu00.tools.bookmark.domain.BmCategory;
 import cn.mu00.tools.bookmark.service.BmCategoryService;
 import cn.mu00.tools.common.constant.ConfigKey;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class commonController {
     @Autowired
     private CommonConfigService commonConfigService;
 
+    @Resource
+    private BlogCategoryService blogCategoryService;
+
 
     @GetMapping("/system-info.interface")
     public R<?> systemInfo() {
@@ -34,6 +39,8 @@ public class commonController {
         map.put("bookmark", bmCategoryList);
         // 2. 博客图标
         map.put(ConfigKey.BLOG_ICON, commonConfigService.getCommonConfigByKey(ConfigKey.BLOG_ICON));
+        // 3. 博客分类
+        map.put("blogType", blogCategoryService.getBlogTypeTreeAndHasMainUrl());
         return R.ok(map);
     }
 }

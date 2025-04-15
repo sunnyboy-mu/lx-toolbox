@@ -26,4 +26,6 @@ public interface BlogCategoryService extends IService<BlogCategory> {
     String removeByCategoryId(String id);
 
     List<BlogTypeTreeVo> getBlogTypeTree();
+
+    List<BlogTypeTreeVo> getBlogTypeTreeAndHasMainUrl();
 }

@@ -90,10 +90,20 @@
             <span class="ml-1">高级（仅登录后可见）</span>
           </div>
         </template>
-        <el-radio-group v-model="form.special">
-          <el-radio :value="0" border>是</el-radio>
-          <el-radio :value="1" border>否</el-radio>
-        </el-radio-group>
+        <div class="flex items-center justify-baseline flex-1">
+          <el-radio-group v-model="form.special">
+            <el-radio :value="0" border>是</el-radio>
+            <el-radio :value="1" border>否</el-radio>
+          </el-radio-group>
+          <div class="ml-auto">
+            <el-checkbox
+              :false-value="1"
+              :true-value="0"
+              v-model="form.groupMainInfo"
+              label="设为分组默认文章"
+            />
+          </div>
+        </div>
       </el-form-item>
     </div>
   </el-form>
@@ -145,7 +155,8 @@
     top: 0, // 是否置顶 0是 1否
     groupId: '', // 所属分组
     categoryId: '', // 所属分类
-    status: 0 // 状态 0是 1否
+    status: 0, // 状态 0是 1否
+    groupMainInfo: 1 // 是否为分组默认文章
   });
 
   const formRef = ref(null);

@@ -1,6 +1,7 @@
 package cn.mu00.tools.controller.blog;
 
 import cn.mu00.tools.blog.domain.BlogInfo;
+import cn.mu00.tools.blog.domain.vo.BlogDetail;
 import cn.mu00.tools.blog.service.BlogInfoService;
 import cn.mu00.tools.common.domain.R;
 import cn.mu00.tools.oss.service.CommonImgService;
@@ -60,6 +61,12 @@ public class BlogInfoController {
     @PostMapping("/upload-img")
     public R<?> uploadImg(MultipartFile file) {
         return R.ok(commonImgService.updateBlogImg(file));
+    }
+
+
+    @GetMapping("/detail-info/{id}.interface")
+    public R<BlogDetail> getBlogDetail(@PathVariable String id) {
+        return R.ok(blogInfoService.getBlogDetail(id));
     }
 
 }
