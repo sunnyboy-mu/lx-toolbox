@@ -14,7 +14,7 @@ export default [
   alignPlugin(),
   gfm({ locale: gfm_zh_Hans }),
   highlight(),
-  codeCopyPlugin(),
+  // codeCopyPlugin(),
   catalogPlugin()
   // mediumZoom()
 ];

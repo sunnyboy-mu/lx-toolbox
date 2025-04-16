@@ -30,8 +30,7 @@
   </div>
 </template>
 <script setup>
-  import '@/components/ByteMdEditor/bytemd-theme-styles/index.css';
-  import '@/components/ByteMdEditor/bytemd-theme-styles/github-markdown.css';
+  import '@/styles/byte-md-theme/index.css';
   import { detailArticle } from '@/api/blog/info';
   import { useBlogStore } from '@/store/module/blog';
   import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
@@ -71,18 +70,25 @@
       groups: null
     };
     loading.value = false;
+    nextTick(() => {
+      titles = Array.from(
+        document
+          .querySelector('.markdown-body')
+          .querySelectorAll('h1,h2,h3,h4,h5,h6')
+      );
+    });
   };
 
-  watch(() => route.params.id, loadArticleInfo);
-
   const scrollHandle = debounce(() => {
-    const range = [70, 300];
+    const range = [0, 300];
     const rects = titles.map((title) => title.getBoundingClientRect());
     for (let i = 0; i < titles.length; i++) {
       const title = titles[i];
       const rect = rects[i];
+
       if (rect.top >= range[0] && rect.top <= range[1]) {
         activeTitle.value = title.id;
+        console.log(title);
         break;
       }
       if (i < titles.length - 1) {
@@ -98,11 +104,6 @@
   onMounted(async () => {
     await loadArticleInfo();
     nextTick(() => {
-      titles = Array.from(
-        document
-          .querySelector('.markdown-body')
-          .querySelectorAll('h1,h2,h3,h4,h5,h6')
-      );
       window.addEventListener('scroll', scrollHandle);
       const element = document.getElementById(
         decodeURI(location.hash.slice(1))
@@ -114,6 +115,13 @@
   onBeforeUnmount(() => {
     window.removeEventListener('scroll', scrollHandle);
   });
+
+  watch(
+    () => route.params.id,
+    async () => {
+      await loadArticleInfo();
+    }
+  );
 
   // watch(activeTitle, () => {
   //   history.replaceState(null, null, `#${activeTitle.value}`);

@@ -8,7 +8,7 @@
   import zh_Hans from 'bytemd/locales/zh_Hans.json';
   import 'bytemd/dist/index.min.css';
   import plugins from './plugins';
-  import './bytemd-theme-styles/github-markdown.css';
+  import '@/styles/byte-md-theme/index.css';
   import { uploadBlogInfoImage } from '@/api/blog/info';
 
   defineOptions({ name: 'ByteMdEditor' });
@@ -57,9 +57,7 @@
   };
 
   const getHtml = () => {
-    return getProcessor({
-      plugins
-    }).processSync(model.value).value;
+    return document.querySelector('.bytemd-preview .markdown-body').innerHTML;
   };
 
   const getCatalog = () => {

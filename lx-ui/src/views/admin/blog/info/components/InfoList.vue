@@ -145,7 +145,7 @@
         queryParams.status = 1;
         break;
       case 'special':
-        queryParams.special = 1;
+        queryParams.special = 0;
         break;
       default:
         break;
