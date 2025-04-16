@@ -178,7 +178,7 @@
 
   watch(visible, (val) => {
     if (val) {
-      isUpdata.value = !!props.data;
+      isUpdata.value = !!props.data?.id;
       assignFields(props.data);
     } else {
       resetFields();

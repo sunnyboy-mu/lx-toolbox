@@ -19,8 +19,8 @@
       <div class="flex items-center gap-1">
         <i
           :class="[
-            menu?.icon?.startsWith('lx-') ? 'lx-iconfont' : 'iconfont',
-            menu.icon
+            child?.icon?.startsWith('lx-') ? 'lx-iconfont' : 'iconfont',
+            child.icon
           ]"
         ></i>
         <span>{{ child.title }}</span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div class="px-2 pt-8 pb-2">
     <el-scrollbar>
       <h3 class="font-bold mb-2">目录</h3>
       <a
