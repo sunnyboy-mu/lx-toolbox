@@ -18,6 +18,7 @@
     <module>lx-oss</module>
     <module>lx-bookmark</module>
     <module>lx-blog</module>
+    <module>lx-book</module>
   </modules>
 
   <properties>
@@ -191,6 +192,12 @@
       <dependency>
         <groupId>cn.mu00</groupId>
         <artifactId>lx-blog</artifactId>
+        <version>${lx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.mu00</groupId>
+        <artifactId>lx-book</artifactId>
         <version>${lx.version}</version>
       </dependency>
 

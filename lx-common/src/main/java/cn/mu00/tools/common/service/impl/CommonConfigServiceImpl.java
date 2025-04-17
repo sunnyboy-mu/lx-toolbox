@@ -31,7 +31,7 @@ public class CommonConfigServiceImpl extends ServiceImpl<CommonConfigMapper, Com
 
     @Override
     @Transactional
-    public String betchUpdateConfig(List<CommonConfig> sysConfigList) {
+    public String batchUpdateConfig(List<CommonConfig> sysConfigList) {
         updateBatchById(sysConfigList);
         return "更新成功";
     }

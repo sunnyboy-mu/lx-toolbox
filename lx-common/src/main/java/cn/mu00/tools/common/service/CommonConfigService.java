@@ -13,5 +13,5 @@ public interface CommonConfigService extends IService<CommonConfig> {
 
     String updateConfig(CommonConfig config);
 
-    String betchUpdateConfig(List<CommonConfig> sysConfigList);
+    String batchUpdateConfig(List<CommonConfig> sysConfigList);
 }

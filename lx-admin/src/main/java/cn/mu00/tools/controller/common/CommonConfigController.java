@@ -4,10 +4,7 @@ import cn.mu00.tools.common.domain.CommonConfig;
 import cn.mu00.tools.common.domain.R;
 import cn.mu00.tools.common.service.CommonConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,12 +25,12 @@ public class CommonConfigController {
     }
 
     @PutMapping
-    public R<String> update(CommonConfig commonConfig) {
+    public R<String> update(@RequestBody CommonConfig commonConfig) {
         return R.ok(commonConfigService.updateConfig(commonConfig));
     }
 
     @PutMapping("/batch")
-    public R<String> batchUpdate(List<CommonConfig> commonConfigs) {
-        return R.ok(commonConfigService.betchUpdateConfig(commonConfigs));
+    public R<String> batchUpdate(@RequestBody List<CommonConfig> commonConfigs) {
+        return R.ok(commonConfigService.batchUpdateConfig(commonConfigs));
     }
 }

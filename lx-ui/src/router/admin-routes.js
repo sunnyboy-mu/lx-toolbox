@@ -79,6 +79,15 @@ export default [
             }
           }
         ]
+      },
+      {
+        path: 'config',
+        name: 'config',
+        component: () => import('@/views/admin/config/index.vue'),
+        meta: {
+          title: '系统配置',
+          icon: 'icon-config'
+        }
       }
     ]
   }

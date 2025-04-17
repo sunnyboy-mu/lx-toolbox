@@ -51,6 +51,12 @@
       <artifactId>lx-blog</artifactId>
     </dependency>
 
+    <!-- book模块-->
+    <dependency>
+      <groupId>cn.mu00</groupId>
+      <artifactId>lx-book</artifactId>
+    </dependency>
+
 
   </dependencies>
 
