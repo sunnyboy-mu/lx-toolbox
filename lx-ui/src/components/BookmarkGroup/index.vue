@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-4 rounded-md">
+  <div class="bg-white p-4 rounded-md" anchor-node>
     <div class="flex items-center justify-between">
       <div class="text-sm">
         <i class="iconfont icon-shuqian"></i>

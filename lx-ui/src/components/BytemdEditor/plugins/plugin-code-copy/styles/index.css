@@ -4,7 +4,7 @@
   position: relative;
   overflow: auto;
   line-height: 1.75;
-  padding-top: 3em;
+  /* padding-top: 3em; */
 }
 
 .code-block-extension-header {
