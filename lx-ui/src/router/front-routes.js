@@ -30,6 +30,24 @@ export default [
         meta: {
           hidden: true
         }
+      },
+      {
+        path: 'about',
+        name: 'about',
+        meta: {
+          title: '关于我',
+          hidden: true
+        },
+        children: [
+          {
+            path: 'book',
+            name: 'book',
+            component: () => import('@/views/frontend/about/book/index.vue'),
+            meta: {
+              title: '书单'
+            }
+          }
+        ]
       }
     ]
   }

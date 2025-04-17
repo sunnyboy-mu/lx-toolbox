@@ -21,6 +21,19 @@ export function generateFrontEndMenu(systemInfo) {
   // 处理博客菜单
   menu.push(...handleBlogMenu(systemInfo));
 
+  menu.push({
+    title: '关于我',
+    path: '/fe/about',
+    icon: 'icon-guanyu',
+    children: [
+      {
+        title: '书单',
+        path: '/fe/about/book',
+        icon: 'icon-book'
+      }
+    ]
+  });
+
   return menu;
 }
 
