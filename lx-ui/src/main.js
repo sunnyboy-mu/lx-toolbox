@@ -11,11 +11,13 @@ import 'animate.css';
 import Particles from '@tsparticles/vue3';
 import { loadSlim } from '@tsparticles/slim';
 import installer from './as-needed';
+import permission from './utils/permission';
 
 const app = createApp(App);
 app.use(store);
 app.use(router);
 app.use(installer);
+app.use(permission);
 app.use(Particles, {
   init: async (engine) => {
     await loadSlim(engine);
