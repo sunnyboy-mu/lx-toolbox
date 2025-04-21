@@ -28,7 +28,7 @@ public class BookInfoServiceImpl extends ServiceImpl<BookInfoMapper, BookInfo> i
 
     @Override
     public List<YearBookVo> listBookByYear() {
-        List<BookInfo> bookList = list();
+        List<BookInfo> bookList = list(new LambdaQueryWrapper<BookInfo>().orderByDesc(BookInfo::getCreatedAt));
         // 按年份分组
         Map<String, List<BookInfo>> groupedByYear = bookList.stream()
                 .collect(Collectors.groupingBy(

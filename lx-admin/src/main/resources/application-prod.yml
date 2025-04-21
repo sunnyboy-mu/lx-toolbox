@@ -9,9 +9,9 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 主库数据源
-      url: jdbc:mysql://sh-cynosdbmysql-grp-avqvez04.sql.tencentcdb.com:29793/lx-toolbox?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-      username: lx-toolbox
-      password: CAFKxFnbmmdfitSi
+      url: jdbc:mysql:${MYSQL_URL}?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      username: ${MYSQL_USER}
+      password: ${MYSQL_PWD}
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
