@@ -1,0 +1,48 @@
+{
+  "name": "lx-ui",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "serve": "vite build && vite preview --host",
+    "build": "vite build",
+    "serve:staging": "vite build --mode staging && vite preview --host",
+    "build:staging": "vite build --mode staging",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"src/**/*.{vue,js}\" --fix",
+    "clean:cache": "rimraf node_modules/.cache/ && rimraf node_modules/.vite/",
+    "clean:lib": "rimraf node_modules",
+    "gen:font": "tsx ./scripts/web-fonts.ts"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@tsparticles/slim": "^3.8.1",
+    "@tsparticles/vue3": "^3.0.1",
+    "@vueuse/core": "^13.0.0",
+    "animate.css": "^4.1.1",
+    "axios": "^1.8.3",
+    "element-plus": "^2.9.6",
+    "lodash-es": "^4.17.21",
+    "pinia": "^3.0.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^10.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "sass": "^1.85.1",
+    "tailwindcss": "^4.1.6",
+    "unplugin-vue-components": "^28.4.1",
+    "vite": "^6.2.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vue-eslint-parser": "^10.1.1"
+  }
+}

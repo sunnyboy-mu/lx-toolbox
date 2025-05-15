@@ -1,56 +1,68 @@
 package cn.mu00.tools.oss.utils;
 
-
-import cn.mu00.tools.oss.domain.OssConfig;
-import cn.mu00.tools.oss.service.OssConfigService;
+import cn.mu00.tools.oss.domain.vo.FileInfoVo;
 import com.upyun.RestManager;
 import com.upyun.UpException;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class UpYunUtil {
 
-    @Autowired
-    private OssConfigService ossConfigService;
+    private RestManager restManager;
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(UpYunUtil.class);
+    @Value("${upyun.bucket}")
+    private String bucket;
 
-    private RestManager upYunRestManager;
+    @Value("${upyun.account}")
+    private String account;
 
-    public void resetUpYunRestManager(){
-        OssConfig ossConfig = ossConfigService.getOssConfigDetail();
-        this.upYunRestManager = getUpYunRestManager(ossConfig);
+    @Value("${upyun.password}")
+    private String password;
+
+    @Value("${upyun.domain-url}")
+    private String domainUrl;
+
+    @Value("${upyun.domain-suffix}")
+    private String domainSuffix;
+
+
+
+
+    /**
+     * 上传文件
+     * @param fileName 文件名
+     * @param filePath  文件路径
+     * @param fileBytes 文件字节数组
+     * @throws UpException 上传异常
+     * @throws IOException IO异常
+     * @return 文件信息
+     */
+    public FileInfoVo upload(String fileName, String filePath, byte[] fileBytes) throws UpException, IOException {
+        this.restManager.writeFile(filePath, fileBytes, null);
+        String url = domainUrl + filePath + domainSuffix;
+        return FileInfoVo.builder().name(fileName).url(url).path(filePath).size((long) fileBytes.length).build();
     }
 
-
-    public static RestManager getUpYunRestManager(OssConfig ossConfig){
-        return new RestManager(ossConfig.getBucket(), ossConfig.getAccount(), ossConfig.getPassword());
-    }
-
-    public Boolean upload(String filePath, byte[] fileBytes) throws UpException, IOException {
-        return upload(upYunRestManager, filePath, fileBytes);
-    }
-
-    public Boolean delete(String filePath) throws UpException, IOException {
-        return delete(upYunRestManager, filePath);
-    }
-
-    public static Boolean upload(RestManager manager, String filePath, byte[] fileBytes) throws UpException, IOException {
-        return manager.writeFile(filePath, fileBytes, null).code() == 200;
-    }
-
-    public static Boolean delete(RestManager manager, String filePath) throws UpException, IOException {
-        return manager.deleteFile(filePath, null).code() == 200;
+    /**
+     * 删除文件
+     *
+     * @param filePath 文件路径
+     * @throws UpException 删除异常
+     * @throws IOException IO异常
+     */
+    public void delete(String filePath) throws UpException, IOException {
+        this.restManager.deleteFile(filePath, null);
     }
 
     @PostConstruct
     public void refreshUpYunTemplate() {
-        resetUpYunRestManager();
+        this.restManager = new RestManager(this.bucket, this.account, this.password);
         log.info("UpYunUtil，初始化成功!");
     }
 }

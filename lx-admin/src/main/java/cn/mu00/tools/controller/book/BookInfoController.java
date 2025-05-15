@@ -4,16 +4,16 @@ import cn.mu00.tools.book.domain.BookInfo;
 import cn.mu00.tools.book.domain.vo.YearBookVo;
 import cn.mu00.tools.book.service.BookInfoService;
 import cn.mu00.tools.common.domain.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/book/info")
 public class BookInfoController {
 
-    @Resource
+    @Autowired
     private BookInfoService bookInfoService;
 
     @GetMapping("/list")

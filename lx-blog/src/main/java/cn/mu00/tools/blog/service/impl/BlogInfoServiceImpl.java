@@ -18,10 +18,10 @@ import cn.mu00.tools.common.utils.SortExchangeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +29,10 @@ import java.util.stream.Collectors;
 @Service
 public class BlogInfoServiceImpl extends ServiceImpl<BlogInfoMapper, BlogInfo> implements BlogInfoService {
 
-    @Resource
+    @Autowired
     private BlogGroupService blogGroupService;
 
-    @Resource
+    @Autowired
     private BlogInfoMapper blogInfoMapper;
 
 

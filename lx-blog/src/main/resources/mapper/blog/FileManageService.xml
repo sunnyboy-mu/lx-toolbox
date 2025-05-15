@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mu00.tools.blog.mapper.BlogCategoryMapper">
+
+  <resultMap type="cn.mu00.tools.blog.domain.vo.BlogTypeTreeVo" id="BlogTypeResult">
+    <id     property="id"      column="id"      />
+    <result property="title"    column="title"    />
+    <result property="icon"    column="icon"    />
+    <collection property="children" ofType="cn.mu00.tools.blog.domain.BlogGroup" >
+      <id     property="id"      column="group_id"      />
+      <result property="title"    column="group_title"    />
+      <result property="icon"    column="group_icon"    />
+      <result property="url" column="group_url" />
+    </collection>
+  </resultMap>
+
+  <select id="getBlogTypeTree" resultMap="BlogTypeResult">
+    SELECT
+      bc.id,
+      bc.title,
+      bc.icon,
+      bg.id AS group_id,
+      bg.title AS group_title,
+      bg.icon AS group_icon
+    FROM
+      blog_category AS bc
+        RIGHT JOIN blog_group AS bg ON bg.category_id = bc.id
+        AND bg.`status` IN ( 0, 2 )
+        AND bg.is_deleted = 0
+    WHERE
+      bc.`status` IN ( 0, 2 )
+      AND bc.is_deleted = 0
+    ORDER BY
+      bc.sort,
+      bg.sort
+  </select>
+
+  <select id="getBlogTypeTreeAndHasMainUrl" resultMap="BlogTypeResult">
+    SELECT
+      bc.id,
+      bc.title,
+      bc.icon,
+      bg.id AS group_id,
+      bg.title AS group_title,
+      bg.icon AS group_icon,
+      bg.url AS group_url
+    FROM
+      blog_category AS bc
+        RIGHT JOIN blog_group AS bg ON bg.category_id = bc.id
+        AND bg.`status` IN
+        <foreach item="status" collection="statusList" open="(" separator="," close=")">
+          #{status}
+        </foreach>
+        AND bg.is_deleted = 0
+        AND bg.url != ''
+    WHERE
+      bc.`status` IN
+      <foreach item="status" collection="statusList" open="(" separator="," close=")">
+        #{status}
+      </foreach>
+      AND bc.is_deleted = 0
+    ORDER BY
+      bc.sort,
+      bg.sort
+  </select>
+</mapper>

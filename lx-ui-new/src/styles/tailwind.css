@@ -1,0 +1,31 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --background-color: #ffffff;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  .dark {
+    --background-color: #18171d;
+    --background: #18171d;
+    --foreground: 210 40% 98%;
+  }
+}
+
+@theme {
+  --color-primary: var(--el-color-primary);
+  --color-primary-300: var(--el-color-primary-light-3);
+  --color-primary-500: var(--el-color-primary-light-5);
+  --color-primary-700: var(--el-color-primary-light-7);
+  --color-primary-800: var(--el-color-primary-light-8);
+  --color-primary-900: var(--el-color-primary-light-9);
+  --color-background: var(--background);
+}
+
+.lx-page {
+  @apply bg-white rounded-md p-2 h-full flex-1 min-h-0;
+}

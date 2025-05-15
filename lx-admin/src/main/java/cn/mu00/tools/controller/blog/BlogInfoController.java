@@ -4,23 +4,23 @@ import cn.mu00.tools.blog.domain.BlogInfo;
 import cn.mu00.tools.blog.domain.vo.BlogDetail;
 import cn.mu00.tools.blog.service.BlogInfoService;
 import cn.mu00.tools.common.domain.R;
-import cn.mu00.tools.oss.service.CommonImgService;
+import cn.mu00.tools.oss.service.FileManageService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/blog/info")
 public class BlogInfoController {
 
-    @Resource
+    @Autowired
     private BlogInfoService blogInfoService;
 
-    @Resource
-    private CommonImgService commonImgService;
+    @Autowired
+    private FileManageService fileManageService;
 
     @GetMapping("/page")
     public R<Page<BlogInfo>> page(Page<BlogInfo> pageQuery, BlogInfo blogInfo) {
@@ -60,7 +60,7 @@ public class BlogInfoController {
 
     @PostMapping("/upload-img")
     public R<?> uploadImg(MultipartFile file) {
-        return R.ok(commonImgService.updateBlogImg(file));
+        return R.ok(fileManageService.uploadBlogImage(file));
     }
 
 

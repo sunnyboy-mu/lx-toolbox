@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lx-system" />
+        <module name="lx-bookmark" />
+        <module name="lx-framework" />
+        <module name="lx-oss" />
+        <module name="lx-admin" />
+        <module name="lx-book" />
+        <module name="lx-blog" />
+        <module name="lx-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bookmark" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
