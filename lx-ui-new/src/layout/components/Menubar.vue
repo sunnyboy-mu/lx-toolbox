@@ -38,6 +38,10 @@
           </div>
           <div class="cursor-pointer duration-300 hover:text-primary menu-item">
             <i class="iconfont lx-guanyu mr-1"></i>
+            <span>Gallery</span>
+          </div>
+          <div class="cursor-pointer duration-300 hover:text-primary menu-item">
+            <i class="iconfont lx-guanyu mr-1"></i>
             <span>Links</span>
           </div>
         </div>
