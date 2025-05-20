@@ -5,8 +5,8 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 主库数据源
-      url: jdbc:mysql://sh-cynosdbmysql-grp-avqvez04.sql.tencentcdb.com:29793/lx-toolbox?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-      username: lx-toolbox
+      url: jdbc:mysql://sh-cynosdbmysql-grp-avqvez04.sql.tencentcdb.com:29793/lx-toolbox-new?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+      username: lx-toolbox-new
       password: CAFKxFnbmmdfitSi
       # 初始连接数
       initialSize: 5

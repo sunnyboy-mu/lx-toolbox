@@ -8,7 +8,11 @@
       <i class="iconfont lx-home mr-1"></i>
       <span>Home</span>
     </div>
-    <div class="cursor-pointer duration-300 hover:text-primary menu-item">
+    <div
+      class="cursor-pointer duration-300 hover:text-primary menu-item"
+      @click="goPage('/notes')"
+      :class="{ active: defaultActive === '/notes' }"
+    >
       <i class="iconfont lx-book mr-1"></i>
       <span>Notes</span>
     </div>

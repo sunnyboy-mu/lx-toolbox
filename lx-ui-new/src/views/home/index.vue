@@ -1,20 +1,14 @@
 <template>
-  <div class="home h-[2000px]" ref="homeRef">
-    1111
-    <!-- <div class="home-item">
-      <UserInfo @scroll="handleScroll" />
-    </div>
-    <div class="home-item">
-      <Weather />
-    </div> -->
-    <!-- 特效 -->
-    <!-- <SpecialEffects /> -->
+  <div class="home w-full" ref="homeRef">
+    <Banner />
+    <Weather />
+    <SpecialEffects />
   </div>
 </template>
 
 <script setup>
   import { ref } from 'vue';
-  import UserInfo from './components/UserInfo.vue';
+  import Banner from './components/Banner.vue';
   import Weather from './components/Weather.vue';
   import SpecialEffects from './components/SpecialEffects.vue';
 

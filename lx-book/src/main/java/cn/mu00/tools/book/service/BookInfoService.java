@@ -1,16 +1,13 @@
 package cn.mu00.tools.book.service;
 
-import cn.mu00.tools.book.domain.BookInfo;
-import cn.mu00.tools.book.domain.vo.YearBookVo;
+import cn.mu00.tools.book.domain.Book;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
-public interface BookInfoService extends IService<BookInfo> {
+public interface BookInfoService extends IService<Book> {
 
-   List<BookInfo> listBook (String year);
+   List<Book> listBook ();
 
-
-   List<YearBookVo> listBookByYear();
 
 }

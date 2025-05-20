@@ -213,10 +213,7 @@ function getUrl(params: Params) {
 
 downloadWebFontCss({
   family: 'Ma Shan Zheng',
-  text: [
-    '沐沐物语',
-    '即使慢，驰而不息，纵会落后，纵会失败，但必须能够到达他所向的目标'
-  ]
+  text: ['沐沐物语', '风吹樱花落，人与樱花错；相逢本无意，花落人终散。']
 });
 
 downloadWebFontCss({

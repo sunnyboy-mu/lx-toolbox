@@ -11,6 +11,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13)
+      '@moe-cryo/utils':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@tsparticles/slim':
         specifier: ^3.8.1
         version: 3.8.1
@@ -373,6 +376,9 @@ packages:
   '@modelcontextprotocol/sdk@1.11.1':
     resolution: {integrity: sha512-9LfmxKTb1v+vUS1/emSk1f5ePmTLkb9Le9AxOB5T0XM59EUumwcS45z05h7aiZx3GI0Bl7mjb3FMEglYj+acuQ==}
     engines: {node: '>=18'}
+
+  '@moe-cryo/utils@1.0.0':
+    resolution: {integrity: sha512-6aHZ7uXi07RTw9KVnG7xY/xSqpIPStKTV2GA8UKxZ8VzNRJ3WFMitJ67JQq5bNSynrp5DHbhS4wea3lmo2JKzw==}
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -2295,6 +2301,8 @@ snapshots:
       zod-to-json-schema: 3.24.5(zod@3.24.4)
     transitivePeerDependencies:
       - supports-color
+
+  '@moe-cryo/utils@1.0.0': {}
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true

@@ -1,7 +1,6 @@
 package cn.mu00.tools.blog.domain;
 
 import cn.mu00.tools.common.domain.BaseEntity;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,24 +29,18 @@ public class BlogInfo extends BaseEntity {
 
     private String tags;
 
-    private Integer sort;
-
-    private Integer special;
-
     private Integer top;
 
-    private String groupId;
-
-    private String categoryId;
-
-    @TableField(exist = false)
-    private Integer groupMainInfo;
-
+    /**
+     * NOTE 笔记
+     * POST 文章
+     */
+    private String type;
 
     /**
      * status
      * 0 正常
-     * 1 隐藏
+     * 1 高级
      * 2 回收站
      */
 

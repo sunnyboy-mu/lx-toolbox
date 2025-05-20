@@ -13,6 +13,15 @@ const routes = [
         meta: {
           title: '首页'
         }
+      },
+      {
+        path: '/notes/:id?',
+        name: 'notes',
+        component: () => import('@/views/notes/index.vue'),
+        meta: {
+          title: '笔记',
+          active: '/notes'
+        }
       }
     ]
   },

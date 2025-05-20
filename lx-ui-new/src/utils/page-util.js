@@ -1,7 +1,7 @@
 import { BLOG_ICON } from '@/enum/common-config';
-import { isExternalLink } from './common';
 import { ElMessage } from 'element-plus/es';
 import { useIconfont } from '@/composables/use-iconfont';
+import { isExternalLink } from '@moe-cryo/utils';
 
 export async function injectionBlogIconfontCss(data) {
   if (
