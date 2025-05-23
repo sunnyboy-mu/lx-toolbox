@@ -22,6 +22,14 @@ const routes = [
           title: '笔记',
           active: '/notes'
         }
+      },
+      {
+        path: '/navs',
+        name: 'navs',
+        component: () => import('@/views/navs/index.vue'),
+        meta: {
+          title: '书签'
+        }
       }
     ]
   },

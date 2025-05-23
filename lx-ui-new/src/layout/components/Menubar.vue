@@ -32,7 +32,11 @@
         <div
           class="flex flex-col gap-1 border border-[var(--el-border-color-light)] py-1"
         >
-          <div class="cursor-pointer duration-300 hover:text-primary menu-item">
+          <div
+            class="cursor-pointer duration-300 hover:text-primary menu-item"
+            @click="goPage('/navs')"
+            :class="{ active: defaultActive === '/navs' }"
+          >
             <i class="iconfont lx-guanyu mr-1"></i>
             <span>Navs</span>
           </div>
